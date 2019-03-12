@@ -14,9 +14,7 @@
     "typescript": "3.3.3333"
   },
   "scripts": {
-    "start": "node server.js",
-    "prestart": "npm run build",
-    "dev": "react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
