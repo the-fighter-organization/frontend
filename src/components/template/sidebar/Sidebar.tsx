@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 interface ISidebarProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
     sidebarActive:boolean;
@@ -20,7 +20,7 @@ const Sidebar = (props:ISidebarProps) => {
                         <a>Home 1</a>
                     </li>
                     <li>
-                        <a href="google.com">Home 2</a>
+                        <a>Home 2</a>
                     </li>
                     <li>
                         <a>Home 3</a>
