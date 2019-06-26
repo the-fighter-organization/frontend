@@ -1,5 +1,8 @@
 export default class CookieManager{
-    public static get(name:string) {
+    static remove(name: string = "Authorization") {
+      document.cookie = `${name}=; expires = Thu, 01 Jan 1970 00:00:00 GMT`
+    }
+    public static get(name:string = "Authorization") {
         name = name + "=";
         var decodedCookie = decodeURIComponent(document.cookie);
         var ca = decodedCookie.split(';');
@@ -15,7 +18,7 @@ export default class CookieManager{
         return "";
       }
 
-      public static set(name:string, value:string, horasExpirar:number) {
+      public static set(name:string = "Authorization", value:string, horasExpirar:number) {
         var d = new Date();
         d.setTime(d.getTime() + (horasExpirar  * 60 * 60 * 1000));
         var expires = "expires="+d.toUTCString();

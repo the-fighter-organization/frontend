@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from 'reactstrap';
-import history from '../../config/router'
+import history from '../../config/history'
 
 interface Props {
   title?: string;

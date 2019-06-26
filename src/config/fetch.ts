@@ -31,7 +31,17 @@ export class FetchHandler {
     }
 
     public async post(url: string, body?: FormData): Promise<Response> {
-        return await fetch(this.getRequestAtual(url, 'POST', body));
+        let response = await fetch(this.getRequestAtual(url, 'POST', body));
+
+        this.tratarResponse(response)
+
+        return response;
+    }
+    tratarResponse(response: Response) {
+        if(response.status === 401){
+            alert("Não autorizado!");
+            CookieManager.remove("Authorization");
+        }
     }
 
     public async put(url: string, body?: FormData): Promise<Response> {

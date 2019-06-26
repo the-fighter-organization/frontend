@@ -4,6 +4,7 @@ import imagem from '../../assets/action-adult-athlete-598631.jpg'
 import './Login.css'
 import { FetchHandler } from '../../config/fetch';
 import CookieManager from '../../config/cookie';
+import history from '../../config/history';
 
 const Login = props => {
     const [email, setEmail] = useState('');
@@ -21,11 +22,16 @@ const Login = props => {
         console.log(response.ok)
 
         if(!response.ok){
+            if(response.status === 500){
+                alert("Ocorreu um erro desconhecido ao fazer a requisição")
+                return
+            }
             return
         }
 
         let data = await response.json() as any
         CookieManager.set('Authorization', `Bearer ${data.token}`, 4);
+        history.push('/')
     }
     return <Container fluid className="h-100">
         <Row className="h-100">
