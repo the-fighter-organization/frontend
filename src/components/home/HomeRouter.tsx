@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { DropdownItem, DropdownMenu, DropdownToggle, Nav, Navbar, NavbarBrand, UncontrolledDropdown } from 'reactstrap';
 
 import Sidebar from '../template/sidebar/Sidebar';
+import { Switch, Redirect } from 'react-router-dom';
+import PrivateRoute from '../route/PrivateRoute';
+import AlunoRouter from '../aluno/AlunoRouter';
+import HomeDashboard from './HomeDashboard';
 
-const Home = props => {
+const HomeRouter = props => {
 	const [sidebarActive, setSidebarActive] = useState(false)
 	return (
 		<React.Fragment>
@@ -47,13 +51,11 @@ const Home = props => {
 							</div>
 						</div>
 					</Navbar>
-
-					<h2>Collapsible Sidebar Using Bootstrap 4</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-					<div className="line" />
-					<h2>Lorem Ipsum Dolor</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					<Switch>
+						<PrivateRoute component={AlunoRouter} path="/alunos" />
+						<PrivateRoute component={HomeDashboard} path="/" />
+						<Redirect to={'/not-found'}/>
+					</Switch>
 				</div>
 			</div>
 		</React.Fragment>
@@ -61,4 +63,4 @@ const Home = props => {
 }
 
 
-export default Home;
+export default HomeRouter;

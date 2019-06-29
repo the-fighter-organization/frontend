@@ -1,4 +1,5 @@
 import React from 'react';
+import history from '../../../config/history';
 
 interface ISidebarProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
     sidebarActive:boolean;
@@ -13,6 +14,9 @@ const Sidebar = (props:ISidebarProps) => {
         </div>
         <ul className="list-unstyled components">
             <p>{nomeEmpresa}</p>
+            <li>
+                <a onClick={e => history.push('/alunos')}>Alunos</a>
+            </li>
             <li className="active">
                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Home</a>
                 <ul className="collapse list-unstyled" id="homeSubmenu">
