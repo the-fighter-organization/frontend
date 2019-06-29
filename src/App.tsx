@@ -1,11 +1,11 @@
 import './App.css';
 
 import React from 'react';
-import { Redirect, Route, Router, Switch } from 'react-router-dom';
+import { Redirect, Router, Switch } from 'react-router-dom';
 
-import history from './config/history';
 import PrivateRoute from './components/route/PrivateRoute';
 import PublicRoute from './components/route/PublicRoute';
+import history from './config/history';
 
 const Home = React.lazy(() => import('./components/home/Home'));
 const Login = React.lazy(() => import('./components/conta/Login'));
