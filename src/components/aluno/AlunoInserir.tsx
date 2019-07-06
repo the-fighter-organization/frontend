@@ -3,12 +3,14 @@ import AlunoForm from "./AlunoForm";
 import React from "react";
 
 const AlunoInserir = props => {
-    console.log("Entrou aqui")
+    async function showValues(e){
+        alert(JSON.stringify(e))
+    }
     return (
         <Container>
             <Row>
                 <Col>
-                    <AlunoForm/>
+                    <AlunoForm onSubmit={showValues}/>
                 </Col>
             </Row>
         </Container>

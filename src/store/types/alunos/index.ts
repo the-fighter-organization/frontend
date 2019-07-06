@@ -1,0 +1,1 @@
+export type AlunoActionTypes = "@alunos/fetch" | "@alunos/edit" | "@alunos/submit"
