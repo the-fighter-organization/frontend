@@ -2,24 +2,20 @@ import React, { useState } from 'react';
 import { Button, Col, Container, Nav, NavItem, NavLink, Row, TabContent, TabPane } from 'reactstrap';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 
-import history from '../../config/history';
-import AlunoFormTabDadosAluno from './AlunoFormTabs/AlunoFormTabDadosAluno';
-import AlunoFormTabResponsaveis from './AlunoFormTabs/AlunoFormTabResponsaveis';
-import AlunoFormTabEndereco from './AlunoFormTabs/AlunoFormTabEndereco';
-import AlunoFormTabEscolaridade from './AlunoFormTabs/AlunoFormTabEscolaridade';
-import AlunoFormTabDemaisDados from './AlunoFormTabs/AlunoFormTabDemaisDados';
-
-interface Props{
-  asd:any
-}
+import history from '../../../config/history';
+import AlunoFormTabDadosAluno from './tabs/AlunoFormTabDadosAluno';
+import AlunoFormTabResponsaveis from './tabs/AlunoFormTabResponsaveis';
+import AlunoFormTabEndereco from './tabs/AlunoFormTabEndereco';
+import AlunoFormTabEscolaridade from './tabs/AlunoFormTabEscolaridade';
+import AlunoFormTabDemaisDados from './tabs/AlunoFormTabDemaisDados';
 
 let AlunoForm = (props: InjectedFormProps<{}, {}, string>) => {
   const [activeTab, setActiveTab] = useState('1');
-  const { handleSubmit } = props
+  const { handleSubmit, pristine, submitting } = props
 
   return (
     <Container fluid>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} noValidate>
         <Nav tabs>
           {/* Dados do aluno */}
           <NavItem>
@@ -90,7 +86,7 @@ let AlunoForm = (props: InjectedFormProps<{}, {}, string>) => {
             <Button type="button" color="secondary" onClick={e => history.goBack()}>
               Voltar
             </Button>
-            <Button className="ml-2" type="submit" color="success">
+            <Button className="ml-2" disabled={submitting || pristine} type="submit" color="success">
               Salvar
             </Button>
           </Col>

@@ -1,16 +1,17 @@
 import { Container, Row, Col } from "reactstrap";
-import AlunoForm from "./AlunoForm";
+import AlunoForm from "./form/AlunoForm";
 import React from "react";
 
 const AlunoInserir = props => {
-    async function showValues(e){
+    async function handleSubmit(e){
+        debugger
         alert(JSON.stringify(e))
     }
     return (
         <Container>
             <Row>
                 <Col>
-                    <AlunoForm onSubmit={showValues}/>
+                    <AlunoForm onSubmit={handleSubmit}/>
                 </Col>
             </Row>
         </Container>

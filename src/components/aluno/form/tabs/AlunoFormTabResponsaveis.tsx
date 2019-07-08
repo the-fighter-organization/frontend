@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Col, Container, ListGroup, ListGroupItem, Row } from 'reactstrap';
 import { Field, FieldArray } from 'redux-form';
 
-import { TODOS_NIVEIS_PARENTESCOS } from '../../../models/Aluno';
-import { renderInput } from '../../template/input/InputTemplate';
-import '@fortawesome/fontawesome-free/css/solid.min.css'
-import '@fortawesome/fontawesome-free/js/fontawesome.js'
+import { TODOS_NIVEIS_PARENTESCOS } from '../../../../models/Aluno';
+import { renderInput } from '../../../template/input/InputTemplate';
 
 const renderResponsaveis = ({ fields, meta: { error } }) => (
     <ListGroup>
