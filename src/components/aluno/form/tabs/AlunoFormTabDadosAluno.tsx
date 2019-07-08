@@ -2,8 +2,8 @@ import React from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import { Field } from 'redux-form';
 
-import { Sexo, TODAS_NACIONALIDADES } from '../../../models/Aluno';
-import { renderInput } from '../../template/input/InputTemplate';
+import { Sexo, TODAS_NACIONALIDADES } from '../../../../models/Aluno';
+import { renderInput } from '../../../template/input/InputTemplate';
 
 
 const AlunoFormTabDadosAluno = props => {

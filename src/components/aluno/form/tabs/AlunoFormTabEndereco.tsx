@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import { Field } from 'redux-form';
 
-import { renderInput } from '../../template/input/InputTemplate';
+import { renderInput } from '../../../template/input/InputTemplate';
 
 
 const AlunoFormTabEndereco = props => {

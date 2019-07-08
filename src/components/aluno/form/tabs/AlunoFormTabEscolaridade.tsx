@@ -2,8 +2,8 @@ import React from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import { Field } from 'redux-form';
 
-import { renderInput } from '../../template/input/InputTemplate';
-import { TODOS_PEDIODOS_ENSINO } from '../../../models/Aluno';
+import { renderInput } from '../../../template/input/InputTemplate';
+import { TODOS_PEDIODOS_ENSINO } from '../../../../models/Aluno';
 
 
 const AlunoFormTabEscolaridade = props => {

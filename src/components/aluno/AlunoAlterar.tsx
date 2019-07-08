@@ -1,5 +1,5 @@
 import { Container, Row, Col } from "reactstrap";
-import AlunoForm from "./AlunoForm";
+import AlunoForm from "./form/AlunoForm";
 import React from "react";
 
 const AlunoAlterar = props => (
