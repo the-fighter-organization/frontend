@@ -3,7 +3,7 @@ import { Col, Container, Row } from 'reactstrap';
 import { Field } from 'redux-form';
 
 import { renderInput } from '../../../template/input/InputTemplate';
-import { TODOS_PEDIODOS_ENSINO } from '../../../../models/Aluno';
+import { TODOS_PERIODOS_ENSINO } from '../../../../models/Aluno';
 
 
 const AlunoFormTabEscolaridade = props => {
@@ -15,7 +15,7 @@ const AlunoFormTabEscolaridade = props => {
                 </Col>
                 <Col xl="2" lg="2" md="6" sm="12">
                     <Field component={renderInput} type="select" name="periodo" label="Período" placeholder="Ex: Matutino">
-                        {TODOS_PEDIODOS_ENSINO.map(item => <option key={item.key} value={item.value}>{item.key}</option>)}
+                        {TODOS_PERIODOS_ENSINO.map(item => <option key={item.key} value={item.value}>{item.key}</option>)}
                     </Field>
                 </Col>
                 <Col xl="4" lg="4" md="6" sm="12">

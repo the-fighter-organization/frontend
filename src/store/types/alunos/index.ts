@@ -1,1 +1,1 @@
-export type AlunoActionTypes = "@alunos/fetch" | "@alunos/edit" | "@alunos/submit"
+export type AlunoReducerTypes = "@alunos/fetch" | "@alunos/edit" | "@alunos/submit"
