@@ -3,7 +3,7 @@ import { Col, Container, Row } from 'reactstrap';
 import { Field } from 'redux-form';
 
 import { Sexo, TODAS_NACIONALIDADES } from '../../../../models/Aluno';
-import { renderInput } from '../../../template/input/InputTemplate';
+import { renderInput, getFieldMask } from '../../../template/input/InputTemplate';
 
 
 const AlunoFormTabDadosAluno = props => {
@@ -20,12 +20,12 @@ const AlunoFormTabDadosAluno = props => {
                     <Field component={renderInput} required type="date" name="dataNascimento" label="Data de nascimento" />
                 </Col>
                 <Col xl="3" lg="3" md="6" sm="12">
-                    <Field component={renderInput} required name="cpf" placeholder="Ex: 12345678910" type="text" label="CPF (Sem dígitos)" />
+                    <Field component={renderInput} required name="cpf" placeholder="Ex: 12345678910" type="text" label="CPF (Sem dígitos)" {...getFieldMask("cpf")}/>
                 </Col>
             </Row>
             <Row>
                 <Col xl="3" lg="3" md="6" sm="12">
-                    <Field component={renderInput} required label="RG" name="rg" type="text" placeholder="Ex: 1234567" />
+                    <Field component={renderInput} required label="RG" name="rg" type="text" placeholder="Ex: 1234567" {...getFieldMask("number", 7)}/>
                 </Col>
                 <Col xl="3" lg="3" md="6" sm="12">
                     <Field component={renderInput} label="Órgão emissor" name="orgaoEmissor" type="text" placeholder="Ex: SSP" />
@@ -52,7 +52,7 @@ const AlunoFormTabDadosAluno = props => {
                     </Field>
                 </Col>
                 <Col xl="3" lg="3" md="6" sm="12">
-                    <Field component={renderInput} label="Telefone" name="telefone" type="text" placeholder="Ex: +XX (XX) XXXXX-XXXX" />
+                    <Field component={renderInput} label="Telefone" name="telefone" type="text" placeholder="Ex: +XX (XX) XXXXX-XXXX"/>
                 </Col>
                 <Col xl="3" lg="3" md="6" sm="12">
                     <Field component={renderInput} label="E-mail" name="email" type="email" placeholder="Ex: meuemail@gmail.com" />

@@ -45,7 +45,7 @@ export enum PeriodoEnsino {
     NOTURNO
 }
 
-export const TODOS_PEDIODOS_ENSINO = [
+export const TODOS_PERIODOS_ENSINO = [
     { key: "Matutino", value: PeriodoEnsino.MATUTINO },
     { key: "Vespertino", value: PeriodoEnsino.VESPERTINO },
     { key: "Noturno", value: PeriodoEnsino.NOTURNO },

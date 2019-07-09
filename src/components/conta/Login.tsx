@@ -13,16 +13,13 @@ const Login = props => {
     async function submitForm(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         let form = document.getElementById('form-user') as HTMLFormElement | undefined;
-        var body = new FormData(form);
-        
         var http = new FetchHandler();
-        
-        http.authorized = false;
-        let response = await http.post('usuarios/authenticate', body);
-        console.log(response.ok)
 
-        if(!response.ok){
-            if(response.status === 500){
+        http.authorized = false;
+        let response = await http.post('usuarios/authenticate', { email, senha });
+
+        if (!response.ok) {
+            if (response.status === 500) {
                 alert("Ocorreu um erro desconhecido ao fazer a requisição")
                 return
             }
@@ -61,7 +58,7 @@ const Login = props => {
                                         <div className="d-flex justify-content-center">
                                             <Button type="submit" color="success" size="md">Login</Button>
                                         </div>
-                                        <hr />                                        
+                                        <hr />
                                         <div className="d-flex justify-content-center">
                                             <span>Ainda não tem conta? <a className="ml-1" href="/usuarios/criar">Inscreva-se</a></span>
                                         </div>

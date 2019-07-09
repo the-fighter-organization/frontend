@@ -3,9 +3,9 @@ import { Button, Col, Container, ListGroup, ListGroupItem, Row } from 'reactstra
 import { Field, FieldArray } from 'redux-form';
 
 import { TODOS_NIVEIS_PARENTESCOS } from '../../../../models/Aluno';
-import { renderInput } from '../../../template/input/InputTemplate';
+import { renderInput, getFieldMask } from '../../../template/input/InputTemplate';
 
-const renderResponsaveis = ({ fields, meta: { error } }) => (
+const renderResponsaveis = ({ fields, meta: { error, submitFailed } }) => (
     <ListGroup>
         <ListGroupItem>
             <Button color="info" onClick={() => fields.push()}>
@@ -32,6 +32,7 @@ const renderResponsaveis = ({ fields, meta: { error } }) => (
                             component={renderInput}
                             label="CPF (Sem dígitos)"
                             placeholder="Ex: 12345678910"
+                            {...getFieldMask("cpf")}
                         />
                     </Col>
 
@@ -42,6 +43,7 @@ const renderResponsaveis = ({ fields, meta: { error } }) => (
                             component={renderInput}
                             label="RG"
                             placeholder="Ex: 1234567"
+                            {...getFieldMask("number", 7)}
                         />
                     </Col>
 
@@ -97,7 +99,7 @@ const AlunoFormTabResponsaveis = props => {
         <Container className="mt-3">
             <Row>
                 <Col>
-                    <FieldArray name="responsaveis" component={renderResponsaveis as any} />
+                    <FieldArray name="responsaveis" component={renderResponsaveis as any}/>
                 </Col>
             </Row>
         </Container>

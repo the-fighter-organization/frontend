@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import { Field } from 'redux-form';
 
-import { renderInput } from '../../../template/input/InputTemplate';
+import { renderInput, getFieldMask } from '../../../template/input/InputTemplate';
 
 
 const AlunoFormTabDemaisDados = props => {
@@ -21,10 +21,10 @@ const AlunoFormTabDemaisDados = props => {
             </Row>
             <Row>
                 <Col xl="3" lg="3" md="6" sm="12">
-                    <Field component={renderInput} name="pesoAtual" type="text" label="Peso atual" placeholder="Ex: 80,00" />
+                    <Field component={renderInput} name="pesoAtual" type="text" label="Peso atual" placeholder="Ex: 80,00" {...getFieldMask("decimal", 2)}/>
                 </Col>
                 <Col xl="3" lg="3" md="6" sm="12">
-                    <Field component={renderInput} type="text" name="alturaAtual" label="Altura atual" placeholder="Ex: 1,80" />
+                    <Field component={renderInput} type="text" name="alturaAtual" label="Altura atual" placeholder="Ex: 1,80" {...getFieldMask("decimal", 2)} />
                 </Col>
                 <Col xl="3" lg="3" md="6" sm="12">
                     <Field component={renderInput} type="date" name="dataUltimaGraduacao" label="Última graduação" placeholder="Ex: 01/01/2010" />
@@ -41,7 +41,7 @@ const AlunoFormTabDemaisDados = props => {
                     <Field component={renderInput} type="text" name="situacaoFejur" label="Situação FEJUR" placeholder="Ex: 01/01/2010" />
                 </Col>
                 <Col xl="3" lg="3" md="6" sm="12">
-                    <Field component={renderInput} name="situacaoFbj" type="text" label="Situação FBJ" placeholder="Ex: Peso médio" />
+                    <Field component={renderInput} name="situacaoFbj" type="text" label="Situação FBJ" placeholder="Ex: Regular" />
                 </Col>
                 <Col xl="3" lg="3" md="6" sm="12">
                     <Field component={renderInput} name="tipoSanguineo" type="text" label="Tipo sanguíneo" placeholder="Ex: A+" />
@@ -49,7 +49,7 @@ const AlunoFormTabDemaisDados = props => {
             </Row>
             <Row>
                 <Col xl="12" lg="12" md="12" sm="12">
-                    <Field component={renderInput} name="observacoesMedicas" type="text" label="Observações médicas" placeholder="Ex: O Aluno está com exames conformes" />
+                    <Field component={renderInput} name="observacoesMedicas" type="textarea" label="Observações médicas" placeholder="Ex: O Aluno está com exames conformes" />
                 </Col>
             </Row>
         </Container>
