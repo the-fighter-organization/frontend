@@ -22,3 +22,25 @@ export function inserirAluno(payload: IAlunoModel){
         })
     }
 }
+
+export function buscarAlunos(busca: IAlunoModel){
+    return async dispatch => {
+        debugger;
+        try{const http = new FetchHandler();
+        const response = await http.post('alunos/buscar', busca);
+        
+        const body = await response.json();
+
+        if(!response.ok){
+            alert(`Ocorreu o seguinte erro: ${body ? body.toString() : null}`)
+        }
+
+        dispatch({
+            type: "@alunos/fetch" as AlunoReducerTypes,
+            payload: body
+        })}
+        catch(e){
+            throw e;
+        }
+    }
+}

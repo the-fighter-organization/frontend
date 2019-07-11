@@ -15,6 +15,8 @@ export default (state = initialState, action):AlunoState => {
     switch (action.type as AlunoReducerTypes) {
         case "@alunos/submit":
             return {...state, alunoEdit : null}
+        case "@alunos/fetch":
+            return {...state, alunos : action.payload}
         default:
             return state
     }
