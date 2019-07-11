@@ -15,22 +15,24 @@ export class FetchHandler {
             this.baseURL = "http://localhost:3001";
         }
     }
-    private getRequestAtual(url: string, method: string, body?: FormData): Request {
+    private getRequestAtual(url: string, method: string, body?: any): Request {
         if (this.authorized && !this.headers.get("Authorization")) {
-            this.headers.append("Authorization", CookieManager.get("Authorized"));
+            this.headers.append("Authorization", CookieManager.get("Authorization"));
         }
         if (!this.headers.get("Content-Type")) {
             this.headers.append("Content-Type", 'application/json');
         }
+
+        const headers = this.headers;
+
         return new Request(`${this.baseURL}/${url}`, {
             method,
-            //@ts-ignore
-            body: body ? JSON.stringify(Object.fromEntries(body)) : undefined,
-            headers: this.headers
+            body: JSON.stringify(body),
+            headers
         })
     }
 
-    public async post(url: string, body?: FormData): Promise<Response> {
+    public async post(url: string, body?: any): Promise<Response> {
         let response = await fetch(this.getRequestAtual(url, 'POST', body));
 
         this.tratarResponse(response)
@@ -44,7 +46,7 @@ export class FetchHandler {
         }
     }
 
-    public async put(url: string, body?: FormData): Promise<Response> {
+    public async put(url: string, body?: any): Promise<Response> {
         return await fetch(this.getRequestAtual(url, 'PUT', body));
     }
 

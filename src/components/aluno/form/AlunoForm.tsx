@@ -8,6 +8,7 @@ import AlunoFormTabResponsaveis from './tabs/AlunoFormTabResponsaveis';
 import AlunoFormTabEndereco from './tabs/AlunoFormTabEndereco';
 import AlunoFormTabEscolaridade from './tabs/AlunoFormTabEscolaridade';
 import AlunoFormTabDemaisDados from './tabs/AlunoFormTabDemaisDados';
+import validate from './validate'
 
 let AlunoForm = (props: InjectedFormProps<{}, {}, string>) => {
   const [activeTab, setActiveTab] = useState('1');
@@ -41,7 +42,7 @@ let AlunoForm = (props: InjectedFormProps<{}, {}, string>) => {
               className={`${activeTab === '3' ? 'active' : ''}`}
               onClick={() => { setActiveTab('3'); }}
             >
-              Endereços
+              Endereço
                 </NavLink>
           </NavItem>
           {/* Escolaridade */}
@@ -97,5 +98,6 @@ let AlunoForm = (props: InjectedFormProps<{}, {}, string>) => {
 }
 
 export default reduxForm({
-  form: 'aluno'
+  form: 'aluno',
+  validate: validate as any
 })(AlunoForm)
