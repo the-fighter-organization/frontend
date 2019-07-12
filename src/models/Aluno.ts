@@ -59,6 +59,7 @@ export enum SituacaoCBJ {
 
 export interface IAlunoModel {
     // Dados do aluno
+    _id: string;
     nome: string;
     dataNascimento: Date;
     cpf: string;
