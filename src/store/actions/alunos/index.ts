@@ -27,7 +27,7 @@ export function buscarAlunos(busca: IAlunoModel){
     return async dispatch => {
         debugger;
         try{const http = new FetchHandler();
-        const response = await http.post('alunos/buscar', busca);
+        const response = await http.post('alunos/buscar', busca || {});
         
         const body = await response.json();
 
