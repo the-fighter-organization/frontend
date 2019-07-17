@@ -59,13 +59,13 @@ export enum SituacaoCBJ {
 
 export interface IAlunoModel {
     // Dados do aluno
-    _id: string;
+    _id?: string;
     nome: string;
-    dataNascimento: Date;
+    dataNascimento: Date | string;
     cpf: string;
     rg: string;
     orgaoEmissor: string;
-    dataExpedicao: string;
+    dataExpedicao: Date | string;
     sexo: Sexo;
     nacionalidade: Nacionalidade;
     naturalidade: Nacionalidade;
@@ -85,55 +85,15 @@ export interface IAlunoModel {
     graduacaoAtual: string;
     pesoAtual: number;
     alturaAtual: number;
-    dataUltimaGraduacao: Date;
+    dataUltimaGraduacao: Date | string;
     categoria: string;
     tipoSanguineo: string;
-    dataFiliacao: Date;
+    dataFiliacao: Date | string;
     situacaoFejur: string;
     situacaoFbj: string;
     observacoesMedicas: string;
     // Administrativo
-    inativo: boolean;
-    usuario: string
-}
-
-export interface IAlunoResponse {
-    // Dados do aluno
-    nome: string;
-    dataNascimento: Date;
-    cpf: string;
-    rg: string;
-    orgaoEmissor: string;
-    dataExpedicao: string;
-    sexo: Sexo;
-    nacionalidade: Nacionalidade;
-    naturalidade: Nacionalidade;
-    numeroZempo: string;
-    numeroFiliacao: string;
-    // Filiação e responsáveis
-    responsaveis: IResponsavel[];
-    // Endereço  
-    endereco: IEndereco,
-    // Contato
-    telefone: string;
-    email: string;
-    // Escolaridade
-    instituicaoEnsino: string;
-    periodo: PeriodoEnsino;
-    ano: string;
-    // Demais Informações
-    graduacaoAtual: string;
-    pesoAtual: number;
-    alturaAtual: number;
-    dataUltimaGraduacao: Date;
-    categoria: string;
-    tipoSanguineo: string;
-    dataFiliacao: Date;
-    situacaoFejur: string;
-    situacaoFbj: string;
-    observacoesMedicas: string;
-    // Administrativo
-    inativo: boolean;
     dataRegistro: Date;
+    inativo: boolean;
     usuario: string
 }

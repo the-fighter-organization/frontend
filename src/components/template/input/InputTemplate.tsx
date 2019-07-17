@@ -100,6 +100,7 @@ export class renderInput extends React.PureComponent<Props> {
             placeholder,
             required,
             type,
+            hidden,
             meta: {
                 error,
                 touched
@@ -115,9 +116,9 @@ export class renderInput extends React.PureComponent<Props> {
 
         return (
             <FormGroup>
-                <Label for={input.name}>{label} {required && <strong className="text-danger">*</strong>}</Label>
-                <Input {...rest} {...input} type={type} placeholder={placeholder} className={classes} id={input.name} name={input.name} required={required}/>
-                {error && touched && <FormFeedback valid={false}>{error}</FormFeedback>}
+                <Label className={classNames({'d-none' : hidden})} for={input.name}>{label} {required && <strong className="text-danger">*</strong>}</Label>
+                <Input {...rest} {...input} type={type} placeholder={placeholder} className={classes} id={input.name} name={input.name} required={required} hidden={hidden}/>
+                {error && touched && !hidden && <FormFeedback valid={false}>{error}</FormFeedback>}
             </FormGroup>
         );
     }

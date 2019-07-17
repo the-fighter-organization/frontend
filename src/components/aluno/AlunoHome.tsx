@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { Dispatch } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Container, Row, Table, UncontrolledCollapse } from 'reactstrap';
 import Col from 'reactstrap/lib/Col';
@@ -10,8 +10,11 @@ import { IAlunoModel } from '../../models/Aluno';
 import { buscarAlunos } from '../../store/actions/alunos';
 import { ApplicationState } from '../../store/reducers';
 import { AlunoState } from '../../store/reducers/alunos';
-import { ALUNOS_NOVO_ROUTE } from '../route/alunos';
+import { ALUNOS_NOVO_ROUTE, ALUNOS_EDITAR_ROUTE } from '../route/alunos';
 import AlunoHomeBuscaForm from './busca/AlunoHomeBuscaForm';
+import { formatarCpfPessoa } from '../../util/string';
+import {distanceInWords} from 'date-fns'
+import pt from 'date-fns/locale/pt'
 
 interface Props extends AlunoState {
     dispatch: any
@@ -46,11 +49,10 @@ class AlunoHome extends React.Component<Props> {
             </tr>
         }
 
-        return alunos.map(item => <tr key={item._id}>
+        return alunos.map(item => <tr onClick={e => history.push(`${ALUNOS_EDITAR_ROUTE}/${item._id}`)} style={{ cursor: 'pointer' }} key={item._id}>
             <td>{item.nome}</td>
-            <td>{item.cpf}</td>
-            <td>{item.rg}</td>
-            <td>{item.telefone}</td>
+            <td>{formatarCpfPessoa(item.cpf)}</td>
+            <td>{`Há ${distanceInWords(item.dataRegistro, new Date(), {locale: pt})}`}</td>
         </tr>)
     }
 
@@ -73,13 +75,12 @@ class AlunoHome extends React.Component<Props> {
                     </Row>
                 </UncontrolledCollapse>
                 <Row>
-                    <Table striped bordered>
+                    <Table striped bordered hover>
                         <thead>
                             <tr>
                                 <th>Nome</th>
                                 <th>CPF</th>
-                                <th>RG</th>
-                                <th>Telefone</th>
+                                <th>Criado</th>
                             </tr>
                         </thead>
                         <tbody>
