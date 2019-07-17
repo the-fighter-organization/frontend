@@ -4,14 +4,15 @@ import { Field, FieldArray } from 'redux-form';
 
 import { TODOS_NIVEIS_PARENTESCOS } from '../../../../models/Aluno';
 import { renderInput, getFieldMask } from '../../../template/input/InputTemplate';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const renderResponsaveis = ({ fields, meta: { error, submitFailed } }) => (
     <ListGroup>
-        <ListGroupItem>
+        <div className="mb-2">
             <Button color="info" onClick={() => fields.push()}>
-                Novo
+                Novo <FontAwesomeIcon icon="plus"/>
             </Button>
-        </ListGroupItem>
+        </div>
         {fields.map((responsavel, index) => (
             <ListGroupItem key={index}>
                 <Row>
@@ -65,6 +66,7 @@ const renderResponsaveis = ({ fields, meta: { error, submitFailed } }) => (
                             label="Parentesco"
                             placeholder="Ex: Mãe"
                         >
+                            <option>Selecione...</option>
                             {TODOS_NIVEIS_PARENTESCOS.map(item => <option key={item.key} value={item.value}>{item.key}</option>)}
                         </Field>
                     </Col>
@@ -84,7 +86,7 @@ const renderResponsaveis = ({ fields, meta: { error, submitFailed } }) => (
                             color="danger"
                             title="Remover responsável"
                             onClick={() => fields.remove(index)}
-                        >Remover
+                        >Remover <FontAwesomeIcon icon="trash"/>
                     </Button>
                     </Col>
                 </Row>
@@ -99,7 +101,7 @@ const AlunoFormTabResponsaveis = props => {
         <Container className="mt-3">
             <Row>
                 <Col>
-                    <FieldArray name="responsaveis" component={renderResponsaveis as any}/>
+                    <FieldArray name="responsaveis" component={renderResponsaveis as any} />
                 </Col>
             </Row>
         </Container>

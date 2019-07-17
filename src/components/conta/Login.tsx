@@ -12,7 +12,6 @@ const Login = props => {
 
     async function submitForm(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        let form = document.getElementById('form-user') as HTMLFormElement | undefined;
         var http = new FetchHandler();
 
         http.authorized = false;
@@ -28,6 +27,7 @@ const Login = props => {
 
         let data = await response.json() as any
         CookieManager.set('Authorization', `Bearer ${data.token}`, 4);
+        CookieManager.set('User', JSON.stringify(data.userInfo), 4);
         history.push('/')
     }
     return <Container fluid className="h-100">

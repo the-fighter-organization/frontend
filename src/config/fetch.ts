@@ -1,4 +1,5 @@
 import CookieManager from "./cookie";
+import history from "./history";
 
 export class FetchHandler {
 
@@ -39,22 +40,36 @@ export class FetchHandler {
 
         return response;
     }
-    tratarResponse(response: Response) {
+
+    private tratarResponse(response: Response) {
         if(response.status === 401){
             alert("Não autorizado!");
             CookieManager.remove("Authorization");
+            history.push('/login')
         }
     }
 
     public async put(url: string, body?: any): Promise<Response> {
-        return await fetch(this.getRequestAtual(url, 'PUT', body));
+        let response = await fetch(this.getRequestAtual(url, 'PUT', body));
+        
+        this.tratarResponse(response);
+
+        return response;
     }
 
     public async get(url: string): Promise<Response> {
-        return await fetch(this.getRequestAtual(url, 'GET'));
+        let response = await fetch(this.getRequestAtual(url, 'GET'));
+        
+        this.tratarResponse(response);
+        
+        return response;
     }
 
     public async delete(url: string): Promise<Response> {
-        return await fetch(this.getRequestAtual(url, 'DELETE'));
+        let response = await fetch(this.getRequestAtual(url, 'DELETE'));
+
+        this.tratarResponse(response);
+
+        return response;
     }
 }

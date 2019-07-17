@@ -18,6 +18,9 @@ export default (state = initialState, action):AlunoState => {
         case "@alunos/fetch":
             debugger
             return {...state, alunos : action.payload}
+        case "@alunos/edit":
+            debugger
+            return {...state, alunoEdit : action.payload}
         default:
             return state
     }

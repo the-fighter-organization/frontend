@@ -3,6 +3,7 @@ import { Col, Container, Row } from 'reactstrap';
 import { Field } from 'redux-form';
 
 import { renderInput, getFieldMask } from '../../../template/input/InputTemplate';
+import DateHandler from '../../../../util/date';
 
 
 const AlunoFormTabDemaisDados = props => {
@@ -27,7 +28,7 @@ const AlunoFormTabDemaisDados = props => {
                     <Field component={renderInput} type="text" name="alturaAtual" label="Altura atual" placeholder="Ex: 1,80" {...getFieldMask("decimal", 2)} />
                 </Col>
                 <Col xl="3" lg="3" md="6" sm="12">
-                    <Field component={renderInput} type="date" name="dataUltimaGraduacao" label="Última graduação" placeholder="Ex: 01/01/2010" />
+                    <Field format={DateHandler.dateToInputDate} component={renderInput} type="date" name="dataUltimaGraduacao" label="Última graduação" placeholder="Ex: 01/01/2010" />
                 </Col>
                 <Col xl="3" lg="3" md="6" sm="12">
                     <Field component={renderInput} name="categoria" type="text" label="Categoria" placeholder="Ex: Peso médio" />
@@ -35,10 +36,10 @@ const AlunoFormTabDemaisDados = props => {
             </Row>
             <Row>
                 <Col xl="3" lg="3" md="6" sm="12">
-                    <Field component={renderInput} type="text" name="dataFiliacao" label="Data de filiação" placeholder="Ex: 01/01/2010" />
+                    <Field format={DateHandler.dateToInputDate} component={renderInput} type="date" name="dataFiliacao" label="Data de filiação" placeholder="Ex: 01/01/2010" />
                 </Col>
                 <Col xl="3" lg="3" md="6" sm="12">
-                    <Field component={renderInput} type="text" name="situacaoFejur" label="Situação FEJUR" placeholder="Ex: 01/01/2010" />
+                    <Field component={renderInput} type="text" name="situacaoFejur" label="Situação FEJUR" placeholder="Ex: Regular" />
                 </Col>
                 <Col xl="3" lg="3" md="6" sm="12">
                     <Field component={renderInput} name="situacaoFbj" type="text" label="Situação FBJ" placeholder="Ex: Regular" />
