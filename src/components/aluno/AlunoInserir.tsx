@@ -1,12 +1,15 @@
 import { Container, Row, Col } from "reactstrap";
 import AlunoForm from "./form/AlunoForm";
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { salvarAluno } from "../../store/actions/alunos";
 import { IAlunoModel } from "../../models/Aluno";
+import { navbarTitleChange } from "../../store/actions/window";
 
 const AlunoInserir = ({ dispatch }) => {
-    debugger
+    useEffect(() => {
+        dispatch(navbarTitleChange("Novo aluno"))
+    })
     async function handleSubmit(e) {
         try {
             await dispatch(salvarAluno(e))

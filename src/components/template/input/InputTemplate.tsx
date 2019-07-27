@@ -79,6 +79,10 @@ export function getFieldMask(mask: MaskTypes, places: number = 0): any {
         return createTextMask({
           pattern: "9999.99.99"
         });
+      case "telefone":
+        return createTextMask({
+          pattern: "(99) 9 9999-9999"
+        });
       case "notaFiscal":
         return createTextMask({
           pattern: "9".repeat(44)

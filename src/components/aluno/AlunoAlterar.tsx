@@ -6,18 +6,8 @@ import { getAluno, salvarAluno } from '../../store/actions/alunos';
 import { AlunoState } from '../../store/reducers/alunos';
 import NotFoundPage from '../route/NotFoundPage';
 import AlunoForm from './form/AlunoForm';
-
-// const AlunoAlterar = ({ match }) => (
-//     <Container>
-//         <Row>
-//             <Col>
-//                 <AlunoForm />
-//             </Col>
-//         </Row>
-//     </Container>
-// )
-
-// export default AlunoAlterar;
+import LoadingPage from '../route/LoadingPage';
+import { navbarTitleChange } from '../../store/actions/window';
 
 interface Props extends AlunoState {
     match: any
@@ -31,9 +21,10 @@ class AlunoAlterar extends React.Component<Props> {
         if (!match || !match.params.id) {
             return <NotFoundPage />
         }
-        debugger
+
         const { id } = match.params;
         await dispatch(getAluno(id))
+        await dispatch(navbarTitleChange("Alterar aluno"))
     }
 
     async handleSubmit(e) {
@@ -46,10 +37,17 @@ class AlunoAlterar extends React.Component<Props> {
     }
 
     render() {
+        const { alunoEdit } = this.props;
+
+
+        if (!alunoEdit) {
+            return <LoadingPage />
+        }
+
         return <Container>
             <Row>
                 <Col>
-                    <AlunoForm initialValues={this.props.alunoEdit} onSubmit={this.handleSubmit.bind(this)} />
+                    <AlunoForm initialValues={alunoEdit} onSubmit={this.handleSubmit.bind(this)} />
                 </Col>
             </Row>
         </Container>

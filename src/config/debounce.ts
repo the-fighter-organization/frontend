@@ -1,7 +1,7 @@
 export function debounce(func:any, wait:number, immediate:boolean = false) {
 	var timeout;
 	return function() {
-    debugger
+    
     //@ts-ignore
 		var context: any = this, args = arguments;
 		var later = function() {
