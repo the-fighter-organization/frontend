@@ -1,10 +1,11 @@
 import { Col, Container, Row, CardBody, Card, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import React, { useState } from 'react'
-import imagem from '../../assets/action-adult-athlete-598631.jpg'
+import imagem from '../../../assets/action-adult-athlete-598631.jpg'
 import './Login.css'
-import { FetchHandler } from '../../config/fetch';
-import CookieManager from '../../config/cookie';
-import history from '../../config/history';
+import { FetchHandler } from '../../../config/fetch';
+import CookieManager from '../../../config/cookie';
+import history from '../../../config/history';
+import { CONTA_EDITAR_SENHA_ROUTE } from '../../route/conta';
 
 const Login = props => {
     const [email, setEmail] = useState('');
@@ -60,7 +61,10 @@ const Login = props => {
                                         </div>
                                         <hr />
                                         <div className="d-flex justify-content-center">
-                                            <span>Ainda não tem conta? <a className="ml-1" href="/usuarios/criar">Inscreva-se</a></span>
+                                            <span>Ainda não tem conta? <a className="ml-1" href="/conta/novo">Inscreva-se</a></span>
+                                        </div>
+                                        <div className="d-flex justify-content-center">
+                                            <span>Esqueceu a senha? <a className="ml-1" href={CONTA_EDITAR_SENHA_ROUTE}>Altere a senha</a></span>
                                         </div>
                                     </Form>
                                 </CardBody>

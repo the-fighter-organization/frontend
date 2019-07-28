@@ -7,11 +7,6 @@ import AlunoAlterar from './AlunoAlterar';
 import AlunoHome from './AlunoHome';
 import AlunoInserir from './AlunoInserir';
 
-
-// const AlunoInserir =  React.lazy(() => require("./AlunoInserir"));
-// const AlunoAlterar =  React.lazy(() => require("./AlunoAlterar"));
-// const AlunoHome =  React.lazy(() => require("./AlunoHome"));
-
 const BASE_ROUTE = 'alunos';
 
 export default props => (

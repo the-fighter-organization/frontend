@@ -11,7 +11,7 @@ interface ISidebarProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
 
 const Sidebar = (props: ISidebarProps) => {
     const { sidebarActive, ...rest } = props
-    debugger
+    
     const { pathname } = window.location;
 
     return <nav {...rest} id="sidebar" className={`${rest.className || ''} ${sidebarActive ? 'active' : ''}`.trim()}>
@@ -20,29 +20,12 @@ const Sidebar = (props: ISidebarProps) => {
         </div>
         <ul className="list-unstyled components">
             {/* <p>{nomeEmpresa}</p> */}
-            <li className={classNames({ active: pathname == '/'})}>
+            <li className={classNames({ active: pathname === '/'})}>
                 <a onClick={e => history.push('/')}>Home</a>
             </li>
-            <li className={classNames({ active: pathname == ALUNOS_HOME_ROUTE })}>
+            <li className={classNames({ active: pathname === ALUNOS_HOME_ROUTE })}>
                 <a onClick={e => history.push(ALUNOS_HOME_ROUTE)}>Alunos</a>
             </li>
-            {/* <li className="active">
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">Home</a>
-                <ul className="collapse list-unstyled" id="homeSubmenu">
-                    <li>
-                        <a>Home 1</a>
-                    </li>
-                    <li>
-                        <a>Home 2</a>
-                    </li>
-                    <li>
-                        <a>Home 3</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a>Contact</a>
-            </li> */}
         </ul>
     </nav>
 }

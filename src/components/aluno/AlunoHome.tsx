@@ -13,8 +13,9 @@ import { AlunoState } from '../../store/reducers/alunos';
 import { ALUNOS_NOVO_ROUTE, ALUNOS_EDITAR_ROUTE } from '../route/alunos';
 import AlunoHomeBuscaForm from './busca/AlunoHomeBuscaForm';
 import { formatarCpfPessoa } from '../../util/string';
-import {distanceInWords} from 'date-fns'
+import { distanceInWords } from 'date-fns'
 import pt from 'date-fns/locale/pt'
+import { navbarTitleChange } from '../../store/actions/window';
 
 interface Props extends AlunoState {
     dispatch: any
@@ -22,7 +23,10 @@ interface Props extends AlunoState {
 
 class AlunoHome extends React.Component<Props> {
     async componentWillMount() {
-        await this.props.dispatch(buscarAlunos(null))
+        const { dispatch } = this.props;
+
+        await dispatch(buscarAlunos(null))
+        await dispatch(navbarTitleChange("Alunos"))
     }
 
     async handleSubmit(data: IAlunoModel) {
@@ -52,7 +56,7 @@ class AlunoHome extends React.Component<Props> {
         return alunos.map(item => <tr onClick={e => history.push(`${ALUNOS_EDITAR_ROUTE}/${item._id}`)} style={{ cursor: 'pointer' }} key={item._id}>
             <td>{item.nome}</td>
             <td>{formatarCpfPessoa(item.cpf)}</td>
-            <td>{`Há ${distanceInWords(item.dataRegistro, new Date(), {locale: pt})}`}</td>
+            <td>{`Há ${distanceInWords(item.dataRegistro, new Date(), { locale: pt })}`}</td>
         </tr>)
     }
 
@@ -75,18 +79,20 @@ class AlunoHome extends React.Component<Props> {
                     </Row>
                 </UncontrolledCollapse>
                 <Row>
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>CPF</th>
-                                <th>Criado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.renderRows()}
-                        </tbody>
-                    </Table>
+                    <Col>
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>CPF</th>
+                                    <th>Criado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.renderRows()}
+                            </tbody>
+                        </Table>
+                    </Col>
                 </Row>
             </Container >
         )

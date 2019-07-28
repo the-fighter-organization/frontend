@@ -1,0 +1,1 @@
+export type WindowReducerTypes = "@window/navbarTitleChange"

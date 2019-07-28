@@ -57,7 +57,7 @@ const AlunoFormTabDadosAluno = props => {
                     </Field>
                 </Col>
                 <Col xl="3" lg="3" md="6" sm="12">
-                    <Field component={renderInput} label="Telefone" name="telefone" type="text" placeholder="Ex: +XX (XX) XXXXX-XXXX" />
+                    <Field component={renderInput} required label="Telefone" name="telefone" type="text" placeholder="Ex: +XX (XX) XXXXX-XXXX" {...getFieldMask("telefone")} />
                 </Col>
                 <Col xl="3" lg="3" md="6" sm="12">
                     <Field component={renderInput} label="E-mail" name="email" type="email" placeholder="Ex: meuemail@gmail.com" />
