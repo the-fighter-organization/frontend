@@ -15,6 +15,9 @@ export class FetchHandler {
         if (process.env.NODE_ENV === 'development') {
             this.baseURL = "http://localhost:3001";
         }
+        else {
+            this.baseURL = "http://warrior-backend.appspot.com"
+        }
     }
     private getRequestAtual(url: string, method: string, body?: any): Request {
         if (this.authorized && !this.headers.get("Authorization")) {
@@ -42,7 +45,7 @@ export class FetchHandler {
     }
 
     private tratarResponse(response: Response) {
-        if(response.status === 401){
+        if (response.status === 401) {
             alert("Não autorizado!");
             CookieManager.remove("Authorization");
             history.push('/login')
@@ -51,7 +54,7 @@ export class FetchHandler {
 
     public async put(url: string, body?: any): Promise<Response> {
         let response = await fetch(this.getRequestAtual(url, 'PUT', body));
-        
+
         this.tratarResponse(response);
 
         return response;
@@ -59,9 +62,9 @@ export class FetchHandler {
 
     public async get(url: string): Promise<Response> {
         let response = await fetch(this.getRequestAtual(url, 'GET'));
-        
+
         this.tratarResponse(response);
-        
+
         return response;
     }
 

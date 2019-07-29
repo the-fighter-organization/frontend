@@ -44,10 +44,6 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "engines": {
-    "node": "10.x",
-    "npm": "6.x"
-  },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.9.0",
     "@types/react-redux": "^7.1.1",
