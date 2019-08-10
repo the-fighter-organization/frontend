@@ -33,10 +33,14 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gcloud app deploy --configuration=warrior-frontend"
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "engines": {
+    "node":"10.X"
   },
   "browserslist": [
     ">0.2%",
