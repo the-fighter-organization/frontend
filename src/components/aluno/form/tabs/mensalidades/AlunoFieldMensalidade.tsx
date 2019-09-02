@@ -27,8 +27,9 @@ interface Props {
     responsaveis: IAlunoMensalidade[]
 }
 
-const renderMensalidades: React.SFC<Props> = ({ fields, meta: { error }, responsaveis }) => (
-    <React.Fragment>
+const renderMensalidades: React.SFC<Props> = ({ fields, meta: { error }, responsaveis }) => {
+    console.log(fields)
+    return <React.Fragment>
         <div className="mb-2">
             <Button color="info" onClick={() => fields.push()}>
                 Nova mensalidade <FontAwesomeIcon icon="plus" />
@@ -48,6 +49,7 @@ const renderMensalidades: React.SFC<Props> = ({ fields, meta: { error }, respons
                         <Row>
                             <Col lg="3" xl="3" md="6" sm="12">
                                 <Field
+                                    format={DateHandler.dateToInputDate}
                                     name={`${mensalidade}.data`}
                                     type="date"
                                     component={renderInput}
@@ -66,8 +68,8 @@ const renderMensalidades: React.SFC<Props> = ({ fields, meta: { error }, respons
                             </Col>
                             <Col lg="3" xl="3" md="6" sm="12">
                                 <Field
-                                    name={`${mensalidade}.observacoes`}
-                                    type="text"
+                                    name={"email"}
+                                    type="email"
                                     component={renderInput}
                                     label="Observações"
                                     placeholder="Ex: Tudo certo"
@@ -83,7 +85,7 @@ const renderMensalidades: React.SFC<Props> = ({ fields, meta: { error }, respons
                                     color="danger"
                                     title="Remover mensalidade"
                                     onClick={() => fields.remove(index)}
-                                >Remover <FontAwesomeIcon icon="trash" />
+                                >Remover mensalidade <FontAwesomeIcon icon="trash" />
                                 </Button>
                             </Col>
                         </Row>
@@ -93,7 +95,7 @@ const renderMensalidades: React.SFC<Props> = ({ fields, meta: { error }, respons
         ))}
         {error && <ListGroupItem className="error">{error}</ListGroupItem>}
     </React.Fragment>
-)
+}
 
 const selector = formValueSelector("aluno");
 

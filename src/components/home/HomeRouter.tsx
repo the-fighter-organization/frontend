@@ -44,7 +44,7 @@ const HomeRouter: React.SFC<Props> = ({ navbarTitle }) => {
 				<Sidebar sidebarActive={sidebarActive} />
 				{/* Page Content Holder */}
 				<div id="content">
-					<Navbar color="light" light expand="md">
+					<Navbar color="light" light expand="md" style={{ height: 50 }} className="mb-3">
 						<div className="container-fluid">
 							<button onClick={e => setSidebarActive(!sidebarActive)} type="button" id="sidebarCollapse" className={`navbar-btn${sidebarActive ? ' active' : ''}`}>
 								<span />
@@ -55,7 +55,7 @@ const HomeRouter: React.SFC<Props> = ({ navbarTitle }) => {
 								<FontAwesomeIcon icon="align-justify" />
 							</button>
 							<div className="collapse navbar-collapse" id="navbarSupportedContent">
-								<NavbarBrand className="ml-2" style={{fontSize:'28px'}}>{navbarTitle}</NavbarBrand>
+								<NavbarBrand className="ml-2" style={{ fontSize: '28px' }}>{navbarTitle}</NavbarBrand>
 								<Nav className="ml-auto" navbar>
 									<UncontrolledDropdown nav inNavbar>
 										<DropdownToggle nav>

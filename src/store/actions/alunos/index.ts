@@ -6,7 +6,7 @@ import { ALUNOS_HOME_ROUTE } from "../../../components/route/alunos";
 
 export function salvarAluno(payload: IAlunoModel) {
     return async dispatch => {
-        
+        debugger
         const http = new FetchHandler();
         const response = await http.post('alunos', payload)
 
@@ -28,7 +28,7 @@ export function salvarAluno(payload: IAlunoModel) {
 
 export function buscarAlunos(busca: IAlunoModel) {
     return async dispatch => {
-        
+
         try {
             const http = new FetchHandler();
             const response = await http.post('alunos/buscar', busca || {});
@@ -52,7 +52,7 @@ export function buscarAlunos(busca: IAlunoModel) {
 
 export function getAluno(id: string) {
     return async dispatch => {
-        
+
         try {
             const http = new FetchHandler();
             const response = await http.get(`alunos/${id}`);
@@ -76,7 +76,7 @@ export function getAluno(id: string) {
 
 export function removerAluno(id: string) {
     return async dispatch => {
-        
+
         try {
             const http = new FetchHandler();
             const response = await http.delete(`alunos/${id}`);

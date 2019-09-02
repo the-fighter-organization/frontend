@@ -52,12 +52,17 @@ class AlunoHome extends React.Component<Props> {
                 </td>
             </tr>
         }
+        debugger
+        return alunos.map(item => {
+            const dataRegistro = new Date(item.dataRegistro);
+            const dataComparacao = new Date();
 
-        return alunos.map(item => <tr onClick={e => history.push(`${ALUNOS_EDITAR_ROUTE}/${item._id}`)} style={{ cursor: 'pointer' }} key={item._id}>
-            <td>{item.nome}</td>
-            <td>{formatarCpfPessoa(item.cpf)}</td>
-            <td>{`Há ${distanceInWords(item.dataRegistro, new Date(), { locale: pt })}`}</td>
-        </tr>)
+            return <tr onClick={e => history.push(`${ALUNOS_EDITAR_ROUTE}/${item._id}`)} style={{ cursor: 'pointer' }} key={item._id}>
+                <td>{item.nome}</td>
+                <td>{formatarCpfPessoa(item.cpf)}</td>
+                <td>{`Há ${distanceInWords(dataRegistro, dataComparacao, { locale: pt })}`}</td>
+            </tr>
+        })
     }
 
     render() {
