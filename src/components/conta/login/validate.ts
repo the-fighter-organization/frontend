@@ -1,5 +1,3 @@
-import { IAlunoModel } from '../../../models/Aluno';
-
 export default (values: any) => {
     let errors: any = {};
 

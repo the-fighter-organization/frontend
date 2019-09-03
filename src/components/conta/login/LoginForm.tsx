@@ -1,9 +1,7 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Button, Col, Container, Row } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
 
-import history from '../../../config/history';
 import { renderInput } from '../../template/input/InputTemplate';
 import validate from './validate';
 

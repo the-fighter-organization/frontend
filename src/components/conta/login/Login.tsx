@@ -1,9 +1,11 @@
-import { Col, Container, Row, CardBody, Card, Form, FormGroup, Label, Input, Button } from 'reactstrap';
-import React, { useState } from 'react'
-import imagem from '../../../assets/action-adult-athlete-598631.jpg'
-import './Login.css'
-import { FetchHandler } from '../../../config/fetch';
+import './Login.css';
+
+import React from 'react';
+import { Card, CardBody, Col, Container, Row } from 'reactstrap';
+
+import imagem from '../../../assets/action-adult-athlete-598631.jpg';
 import CookieManager from '../../../config/cookie';
+import { FetchHandler } from '../../../config/fetch';
 import history from '../../../config/history';
 import { CONTA_EDITAR_SENHA_ROUTE } from '../../route/conta';
 import LoginForm from './LoginForm';
