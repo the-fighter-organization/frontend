@@ -1,27 +1,48 @@
-import { Col, Container, Row, CardBody, Card, Form, FormGroup, Label, Input, Button } from 'reactstrap';
-import React, { useState } from 'react'
-import imagem from '../../../assets/action-adult-athlete-598631.jpg'
-import './Login.css'
-import { FetchHandler } from '../../../config/fetch';
+import './Login.css';
+
+import React from 'react';
+import { Card, CardBody, Col, Container, Row } from 'reactstrap';
+
+import imagem from '../../../assets/action-adult-athlete-598631.jpg';
 import CookieManager from '../../../config/cookie';
+import { FetchHandler } from '../../../config/fetch';
 import history from '../../../config/history';
 import { CONTA_EDITAR_SENHA_ROUTE } from '../../route/conta';
+import LoginForm from './LoginForm';
 
 const Login = props => {
-    const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
+    // const [email, setEmail] = useState('');
+    // const [senha, setSenha] = useState('');
 
-    async function submitForm(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
+    // async function submitForm(e: React.FormEvent<HTMLFormElement>) {
+    //     e.preventDefault();
+    //     var http = new FetchHandler();
+
+    //     http.authorized = false;
+    //     let response = await http.post('usuarios/authenticate', { email, senha });
+
+    //     if (!response.ok) {
+    //         if (response.status === 500) {
+    //             alert("Ocorreu um erro desconhecido ao fazer a requisição")
+    //             return
+    //         }
+    //         return
+    //     }
+
+    //     let data = await response.json() as any
+    //     CookieManager.set('Authorization', `Bearer ${data.token}`, 4);
+    //     CookieManager.set('User', JSON.stringify(data.userInfo), 4);
+    //     history.push('/')
+    // }
+    async function submitForm(e: any) {
         var http = new FetchHandler();
 
         http.authorized = false;
-        let response = await http.post('usuarios/authenticate', { email, senha });
+        let response = await http.post('usuarios/authenticate', e);
 
         if (!response.ok) {
             if (response.status === 500) {
                 alert("Ocorreu um erro desconhecido ao fazer a requisição")
-                return
             }
             return
         }
@@ -46,8 +67,8 @@ const Login = props => {
                         <Col>
                             <Card>
                                 <CardBody>
-                                    <h1 className="text-center mb-3">Warrior</h1>
-                                    <Form onSubmit={e => submitForm(e)} id="form-user">
+                                    <h2 className="text-center mb-3">Warrior</h2>
+                                    {/* <Form onSubmit={e => submitForm(e)} id="form-user">
                                         <FormGroup>
                                             <Label>Usuário</Label>
                                             <Input required type="email" name="email" onChange={e => setEmail(e.target.value)} value={email} />
@@ -66,7 +87,15 @@ const Login = props => {
                                         <div className="d-flex justify-content-center">
                                             <span>Esqueceu a senha? <a className="ml-1" href={CONTA_EDITAR_SENHA_ROUTE}>Altere a senha</a></span>
                                         </div>
-                                    </Form>
+                                    </Form> */}
+                                    <LoginForm onSubmit={submitForm as any} />
+                                    <hr />
+                                    <div className="d-flex justify-content-center">
+                                        <span>Ainda não tem conta? <a className="ml-1" href="/conta/novo">Inscreva-se</a></span>
+                                    </div>
+                                    <div className="d-flex justify-content-center">
+                                        <span>Esqueceu a senha? <a className="ml-1" href={CONTA_EDITAR_SENHA_ROUTE}>Altere a senha</a></span>
+                                    </div>
                                 </CardBody>
                             </Card>
                         </Col>

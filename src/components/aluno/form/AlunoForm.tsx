@@ -14,6 +14,7 @@ import validate from './validate';
 import classNames from 'classnames'
 import { IAlunoModel } from '../../../models/Aluno';
 import { reduxFormOnSubmitFail } from '../../../config/reduxForm';
+import AlunoFormTabMensalidades from './tabs/mensalidades/AlunoFormTabMensalidades';
 
 interface Props extends AlunoState {
   edit?: boolean
@@ -86,11 +87,20 @@ class AlunoForm extends React.Component<Props, State> {
                 Demais informações
               </NavLink>
             </NavItem>
+            {/* Mensalidades */}
+            <NavItem>
+              <NavLink
+                className={`${activeTab === '5' ? 'active' : ''}`}
+                onClick={() => { this.setActiveTab('5'); }}
+              >
+                Mensalidades
+              </NavLink>
+            </NavItem>
             {/* Administrativo */}
             {initialValues && initialValues._id && <NavItem>
               <NavLink
-                className={classNames({active : activeTab === '5', 'text-white': activeTab !== '5', 'bg-danger': activeTab !== '5'})}
-                onClick={() => { this.setActiveTab('5'); }}
+                className={classNames({ active: activeTab === '6', 'text-white': activeTab !== '6', 'bg-danger': activeTab !== '6' })}
+                onClick={() => { this.setActiveTab('6'); }}
               >
                 Administrativo
               </NavLink>
@@ -110,7 +120,10 @@ class AlunoForm extends React.Component<Props, State> {
               <AlunoFormTabDemaisDados />
             </TabPane>
             <TabPane tabId="5">
-              <AlunoFormTabAdministrativo initialValues={initialValues}/>
+              <AlunoFormTabMensalidades />
+            </TabPane>
+            <TabPane tabId="6">
+              <AlunoFormTabAdministrativo initialValues={initialValues} />
             </TabPane>
           </TabContent>
           <hr />

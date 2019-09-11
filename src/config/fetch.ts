@@ -14,6 +14,7 @@ export class FetchHandler {
     configBaseURL() {
         if (process.env.NODE_ENV === 'development') {
             this.baseURL = "http://localhost:3001";
+            // this.baseURL = "http://warrior-backend.appspot.com"
         }
         else {
             this.baseURL = "http://warrior-backend.appspot.com"
