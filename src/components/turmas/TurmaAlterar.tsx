@@ -2,19 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Col, Container, Row } from 'reactstrap';
 
-import { getAluno, salvarAluno } from '../../store/actions/alunos';
-import { AlunoState } from '../../store/reducers/alunos';
+import { getTurma, salvarTurma } from '../../store/actions/turmas';
+import { TurmaState } from '../../store/reducers/turmas';
 import NotFoundPage from '../route/NotFoundPage';
-import AlunoForm from './form/TurmaForm';
+import TurmaForm from './form/TurmaForm';
 import LoadingPage from '../route/LoadingPage';
 import { navbarTitleChange } from '../../store/actions/window';
 
-interface Props extends AlunoState {
+interface Props extends TurmaState {
     match: any
     dispatch: any
 }
 
-class AlunoAlterar extends React.Component<Props> {
+class TurmaAlterar extends React.Component<Props> {
     async componentDidMount() {
         const { match, dispatch } = this.props;
 
@@ -23,36 +23,36 @@ class AlunoAlterar extends React.Component<Props> {
         }
 
         const { id } = match.params;
-        await dispatch(getAluno(id))
-        await dispatch(navbarTitleChange("Alterar aluno"))
+        await dispatch(getTurma(id))
+        await dispatch(navbarTitleChange("Alterar turma"))
     }
 
     async handleSubmit(e) {
         const { dispatch } = this.props;
         try {
-            await dispatch(salvarAluno(e))
+            await dispatch(salvarTurma(e))
         } catch (error) {
-            alert('Ocorreu um erro ao salvar o aluno! ' + error.message)
+            alert('Ocorreu um erro ao salvar o turma! ' + error.message)
         }
     }
 
     render() {
-        const { alunoEdit } = this.props;
+        const { turmaEdit } = this.props;
 
 
-        if (!alunoEdit) {
+        if (!turmaEdit) {
             return <LoadingPage />
         }
 
         return <Container>
             <Row>
                 <Col>
-                    <AlunoForm initialValues={alunoEdit} onSubmit={this.handleSubmit.bind(this)} />
+                    <TurmaForm initialValues={turmaEdit} onSubmit={this.handleSubmit.bind(this)} />
                 </Col>
             </Row>
         </Container>
     }
 }
 
-const mapStateToProps = state => state.aluno
-export default connect(mapStateToProps)(AlunoAlterar)
+const mapStateToProps = state => state.turma
+export default connect(mapStateToProps)(TurmaAlterar)

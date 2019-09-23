@@ -1,13 +1,14 @@
 import { IAlunoModel } from './Aluno';
 
 export interface ITurmaModel {
-  dataRegistro: Date;
   _id: string;
+  nome: string;
   arteMarcial: string;
   localTreino: string;
   colaboradores: string[];
   aulas: IAulaModel[];
   // Administrativo
+  dataRegistro: Date;
   inativo: boolean;
 }
 

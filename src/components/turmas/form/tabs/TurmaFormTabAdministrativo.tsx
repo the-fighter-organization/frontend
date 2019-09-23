@@ -17,7 +17,7 @@ interface Props {
     dispatch?: any
 }
 
-const AlunoFormTabAdministrativo = (props: Props) => {
+const TurmaFormTabAdministrativo = (props: Props) => {
     const { initialValues, dispatch } = props;
 
     async function remover() {
@@ -54,4 +54,4 @@ const AlunoFormTabAdministrativo = (props: Props) => {
     )
 }
 
-export default connect()(AlunoFormTabAdministrativo)
+export default connect()(TurmaFormTabAdministrativo)

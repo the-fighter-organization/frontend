@@ -14,6 +14,7 @@ import ContaRouter from '../conta/ContaRouter';
 import { connect } from 'react-redux';
 import { ApplicationState } from '../../store/reducers';
 import { WindowState } from '../../store/reducers/window';
+import TurmaRouter from '../turmas/TurmaRouter';
 
 interface Props extends WindowState {
 
@@ -80,6 +81,7 @@ const HomeRouter: React.SFC<Props> = ({ navbarTitle }) => {
 					</Navbar>
 					<Switch>
 						<PrivateRoute component={AlunoRouter} path="/alunos" />
+						<PrivateRoute component={TurmaRouter} path="/turmas" />
 						<PrivateRoute path="/conta" component={ContaRouter} />
 						<PrivateRoute component={HomeDashboard} path="/" />
 						<Redirect to={'/not-found'} />

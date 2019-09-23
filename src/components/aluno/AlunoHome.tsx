@@ -25,13 +25,13 @@ class AlunoHome extends React.Component<Props> {
     async componentWillMount() {
         const { dispatch } = this.props;
 
-        await dispatch(buscarAlunos(null))
+        await dispatch(buscarAlunos({ filters: null }))
         await dispatch(navbarTitleChange("Alunos"))
     }
 
-    async handleSubmit(data: IAlunoModel) {
+    async handleSubmit(filters: IAlunoModel) {
         try {
-            await this.props.dispatch(buscarAlunos(data))
+            await this.props.dispatch(buscarAlunos({ filters }))
         } catch (error) {
             alert("Erro")
         }

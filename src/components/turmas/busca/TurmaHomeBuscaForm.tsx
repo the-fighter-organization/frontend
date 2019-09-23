@@ -6,10 +6,10 @@ import { Field, InjectedFormProps, reduxForm, submit } from 'redux-form';
 import { debounce } from '../../../config/debounce';
 import { renderInput } from '../../template/input/InputTemplate';
 
-const AlunoHomeBuscaFormCommon = ({ handleSubmit, dispatch }: InjectedFormProps<{}, {}, string> | any) => {
+const TurmaHomeBuscaFormCommon = ({ handleSubmit, dispatch }: InjectedFormProps<{}, {}, string> | any) => {
 
     const updateBusca = debounce(() => dispatch(submit("homeBusca")), 1000);
-    
+
     return (
         <form onSubmit={handleSubmit}>
             <Row>
@@ -24,8 +24,8 @@ const AlunoHomeBuscaFormCommon = ({ handleSubmit, dispatch }: InjectedFormProps<
     )
 }
 
-const AlunoHomeBuscaForm = reduxForm({
+const TurmaHomeBuscaForm = reduxForm({
     form: 'homeBusca'
-})(AlunoHomeBuscaFormCommon)
+})(TurmaHomeBuscaFormCommon)
 
-export default connect()(AlunoHomeBuscaForm);
+export default connect()(TurmaHomeBuscaForm);

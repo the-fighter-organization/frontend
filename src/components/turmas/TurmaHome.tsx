@@ -10,14 +10,14 @@ import { ITurmaModel } from '../../models/Turma';
 import { buscarTurmas } from '../../store/actions/turmas';
 import { navbarTitleChange } from '../../store/actions/window';
 import { ApplicationState } from '../../store/reducers';
-import { TurmaState } from '../../store/reducers/turma';
+import { TurmaState } from '../../store/reducers/turmas';
 import { TURMAS_EDITAR_ROUTE, TURMAS_NOVO_ROUTE } from '../route/turma';
-import AlunoHomeBuscaForm from './busca/AlunoHomeBuscaForm';
+import TurmaHomeBuscaForm from './busca/TurmaHomeBuscaForm';
 import { distanceInWords } from 'date-fns'
 import pt from 'date-fns/locale/pt'
 
 interface Props extends TurmaState {
-    dispatch: any
+    dispatch: any;
 }
 
 class TurmaHome extends React.Component<Props> {
@@ -54,9 +54,10 @@ class TurmaHome extends React.Component<Props> {
         debugger
         return turmas.map(item => {
             return <tr onClick={e => history.push(`${TURMAS_EDITAR_ROUTE}/${item._id}`)} style={{ cursor: 'pointer' }} key={item._id}>
+                <td>{item.nome}</td>
                 <td>{item.arteMarcial}</td>
                 <td>{item.localTreino}</td>
-                <td>{`Há ${distanceInWords(item.dataRegistro, new Date(), { locale: pt })}`</td>
+                <td>{`Há ${distanceInWords(item.dataRegistro, new Date(), { locale: pt })}`}</td>
             </tr>
         })
     }
@@ -75,7 +76,7 @@ class TurmaHome extends React.Component<Props> {
                 <UncontrolledCollapse toggler="btn-buscar">
                     <Row>
                         <Col>
-                            <AlunoHomeBuscaForm onSubmit={this.handleSubmit.bind(this) as any} />
+                            <TurmaHomeBuscaForm onSubmit={this.handleSubmit.bind(this) as any} />
                         </Col>
                     </Row>
                 </UncontrolledCollapse>
@@ -85,7 +86,8 @@ class TurmaHome extends React.Component<Props> {
                             <thead>
                                 <tr>
                                     <th>Nome</th>
-                                    <th>CPF</th>
+                                    <th>Arte marcial</th>
+                                    <th>Local de treino</th>
                                     <th>Criado</th>
                                 </tr>
                             </thead>
@@ -101,6 +103,6 @@ class TurmaHome extends React.Component<Props> {
 
 }
 
-const mapStateToProps = (state: ApplicationState) => state.aluno
+const mapStateToProps = (state: ApplicationState) => state.turma
 
 export default connect(mapStateToProps)(TurmaHome);

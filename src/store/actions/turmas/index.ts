@@ -34,8 +34,7 @@ export function buscarTurmas(busca: ITurmaModel) {
 
         try {
             const http = new FetchHandler();
-            const response = await http.post(`${BASE_CONTROLLER}/buscar`, busca || {});
-
+            const response = await http.post(`${BASE_CONTROLLER}/buscar`, { filters: busca || {}, select: "_id nome arteMarcial localTreino dataRegistro" });
             const body = await response.json();
 
             if (!response.ok) {
