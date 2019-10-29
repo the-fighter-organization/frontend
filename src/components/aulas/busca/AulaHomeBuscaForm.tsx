@@ -14,10 +14,7 @@ const TurmaHomeBuscaFormCommon = ({ handleSubmit, dispatch }: InjectedFormProps<
         <form onSubmit={handleSubmit}>
             <Row>
                 <Col md="6" sm="12">
-                    <Field component={renderInput} onChange={updateBusca} label="Nome" type="search" name="nome" placeholder="Ex: Turma 1" />
-                </Col>
-                <Col md="6" sm="12">
-                    <Field component={renderInput} onChange={updateBusca} label="Arte marcial" type="search" name="arteMarcial" placeholder="Ex: Judô" />
+                    <Field component={renderInput} onChange={updateBusca} label="Turma" type="search" name="nome" placeholder="Ex: Turma 1" />
                 </Col>
             </Row>
         </form>

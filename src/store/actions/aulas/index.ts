@@ -28,13 +28,13 @@ export function salvarAula(payload: IAulaModel) {
     }
 }
 
-export function buscarAulas(busca: IAulaModel) {
+export function buscarAulas(busca: any) {
     return async dispatch => {
 
         try {
             const http = new FetchHandler();
-            // const response = await http.post(`${BASE_CONTROLLER}/buscar`, { filters: busca || {}, select: "_id nome arteMarcial localTreino dataRegistro" });
-            const response = await http.get(`${BASE_CONTROLLER}`);
+            const response = await http.post(`${BASE_CONTROLLER}/buscar`, { filters: busca || {} });
+            // const response = await http.get(`${BASE_CONTROLLER}`);
             const body = await response.json();
 
             if (!response.ok) {

@@ -20,8 +20,6 @@ interface Props {
 const AulaFormTabAdministrativo = (props: Props) => {
     const { initialValues, dispatch } = props;
 
-    console.log(initialValues)
-
     async function remover() {
         if (!initialValues) {
             return
