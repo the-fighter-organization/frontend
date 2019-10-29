@@ -1,37 +1,36 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Container, Row, Table, UncontrolledCollapse } from 'reactstrap';
-import Col from 'reactstrap/lib/Col';
+import { Button, Container, Row, Table, UncontrolledCollapse, Col } from 'reactstrap';
 import { reset } from 'redux-form';
 
 import history from '../../config/history';
-import { IAlunoModel } from '../../models/Aluno';
-import { buscarAlunos } from '../../store/actions/alunos';
+import { IAulaModel, ITurmaModel } from '../../models/Turma';
+import { buscarAulas } from '../../store/actions/aulas';
+import { navbarTitleChange } from '../../store/actions/window';
 import { ApplicationState } from '../../store/reducers';
-import { AlunoState } from '../../store/reducers/alunos';
-import { ALUNOS_NOVO_ROUTE, ALUNOS_EDITAR_ROUTE } from '../route/alunos';
-import AlunoHomeBuscaForm from './busca/AlunoHomeBuscaForm';
-import { formatarCpfPessoa } from '../../util/string';
+import { AulaState } from '../../store/reducers/aulas';
+import { AULAS_EDITAR_ROUTE, AULAS_NOVO_ROUTE } from '../route/aula';
+import AulaHomeBuscaForm from './busca/AulaHomeBuscaForm';
 import { distanceInWords } from 'date-fns'
 import pt from 'date-fns/locale/pt'
-import { navbarTitleChange } from '../../store/actions/window';
+import DateHandler from '../../util/date';
 
-interface Props extends AlunoState {
-    dispatch: any
+interface Props extends AulaState {
+    dispatch: any;
 }
 
-class AlunoHome extends React.Component<Props> {
+class AulaHome extends React.Component<Props> {
     async componentWillMount() {
         const { dispatch } = this.props;
 
-        await dispatch(buscarAlunos({ filters: null }))
-        await dispatch(navbarTitleChange("Alunos"))
+        await dispatch(buscarAulas(null))
+        await dispatch(navbarTitleChange("Aula"))
     }
 
-    async handleSubmit(filters: IAlunoModel) {
+    async handleSubmit(data: IAulaModel) {
         try {
-            await this.props.dispatch(buscarAlunos({ filters }))
+            await this.props.dispatch(buscarAulas(data))
         } catch (error) {
             alert("Erro")
         }
@@ -39,13 +38,13 @@ class AlunoHome extends React.Component<Props> {
 
     async limparBusca() {
         await this.props.dispatch(reset("homeBusca"))
-        await this.props.dispatch(buscarAlunos(null))
+        await this.props.dispatch(buscarAulas(null))
     }
 
     renderRows() {
-        const { alunos } = this.props;
+        const { aulas } = this.props;
 
-        if (!alunos || !alunos.length) {
+        if (!aulas || !aulas.length) {
             return <tr>
                 <td colSpan={4}>
                     Não há nenhum item para exibir!
@@ -53,14 +52,11 @@ class AlunoHome extends React.Component<Props> {
             </tr>
         }
 
-        return alunos.map(item => {
-            const dataRegistro = new Date(item.dataRegistro);
-            const dataComparacao = new Date();
-
-            return <tr onClick={e => history.push(`${ALUNOS_EDITAR_ROUTE}/${item._id}`)} style={{ cursor: 'pointer' }} key={item._id}>
-                <td>{item.nome}</td>
-                <td>{formatarCpfPessoa(item.cpf)}</td>
-                <td>{`Há ${distanceInWords(dataRegistro, dataComparacao, { locale: pt })}`}</td>
+        return aulas.map(item => {
+            return <tr onClick={e => history.push(`${AULAS_EDITAR_ROUTE}/${(item.turma as ITurmaModel)._id}/${item._id}`)} style={{ cursor: 'pointer' }} key={item._id}>
+                <td>{DateHandler.dateToShortDateTimeString(item.dataAula)}</td>
+                <td>{(item.turma as ITurmaModel).nome || ''}</td>
+                <td>{`Há ${distanceInWords(item.dataRegistro, new Date(), { locale: pt })}`}</td>
             </tr>
         })
     }
@@ -70,7 +66,7 @@ class AlunoHome extends React.Component<Props> {
             <Container>
                 <Row className="mb-2">
                     <Col>
-                        <Button color="success" onClick={e => history.push(ALUNOS_NOVO_ROUTE)}>Novo <FontAwesomeIcon icon="plus" /></Button>
+                        <Button color="success" onClick={e => history.push(AULAS_NOVO_ROUTE)}>Novo <FontAwesomeIcon icon="plus" /></Button>
                     </Col>
                     <Col className="d-flex justify-content-end">
                         <Button color="info" id="btn-buscar" onClick={this.limparBusca.bind(this)} className="ml-2">Filtrar <FontAwesomeIcon icon="filter" /></Button>
@@ -79,7 +75,7 @@ class AlunoHome extends React.Component<Props> {
                 <UncontrolledCollapse toggler="btn-buscar">
                     <Row>
                         <Col>
-                            <AlunoHomeBuscaForm onSubmit={this.handleSubmit.bind(this) as any} />
+                            <AulaHomeBuscaForm onSubmit={this.handleSubmit.bind(this) as any} />
                         </Col>
                     </Row>
                 </UncontrolledCollapse>
@@ -88,8 +84,8 @@ class AlunoHome extends React.Component<Props> {
                         <Table striped bordered hover>
                             <thead>
                                 <tr>
-                                    <th>Nome</th>
-                                    <th>CPF</th>
+                                    <th>Data e hora da aula</th>
+                                    <th>Turma</th>
                                     <th>Criado</th>
                                 </tr>
                             </thead>
@@ -105,6 +101,6 @@ class AlunoHome extends React.Component<Props> {
 
 }
 
-const mapStateToProps = (state: ApplicationState) => state.aluno
+const mapStateToProps = (state: ApplicationState) => state.aula
 
-export default connect(mapStateToProps)(AlunoHome);
+export default connect(mapStateToProps)(AulaHome);

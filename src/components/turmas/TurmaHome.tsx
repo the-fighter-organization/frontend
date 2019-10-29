@@ -6,32 +6,31 @@ import Col from 'reactstrap/lib/Col';
 import { reset } from 'redux-form';
 
 import history from '../../config/history';
-import { IAlunoModel } from '../../models/Aluno';
-import { buscarAlunos } from '../../store/actions/alunos';
+import { ITurmaModel } from '../../models/Turma';
+import { buscarTurmas } from '../../store/actions/turmas';
+import { navbarTitleChange } from '../../store/actions/window';
 import { ApplicationState } from '../../store/reducers';
-import { AlunoState } from '../../store/reducers/alunos';
-import { ALUNOS_NOVO_ROUTE, ALUNOS_EDITAR_ROUTE } from '../route/alunos';
-import AlunoHomeBuscaForm from './busca/AlunoHomeBuscaForm';
-import { formatarCpfPessoa } from '../../util/string';
+import { TurmaState } from '../../store/reducers/turmas';
+import { TURMAS_EDITAR_ROUTE, TURMAS_NOVO_ROUTE } from '../route/turma';
+import TurmaHomeBuscaForm from './busca/TurmaHomeBuscaForm';
 import { distanceInWords } from 'date-fns'
 import pt from 'date-fns/locale/pt'
-import { navbarTitleChange } from '../../store/actions/window';
 
-interface Props extends AlunoState {
-    dispatch: any
+interface Props extends TurmaState {
+    dispatch: any;
 }
 
-class AlunoHome extends React.Component<Props> {
+class TurmaHome extends React.Component<Props> {
     async componentWillMount() {
         const { dispatch } = this.props;
 
-        await dispatch(buscarAlunos({ filters: null }))
-        await dispatch(navbarTitleChange("Alunos"))
+        await dispatch(buscarTurmas(null))
+        await dispatch(navbarTitleChange("Turma"))
     }
 
-    async handleSubmit(filters: IAlunoModel) {
+    async handleSubmit(filters: ITurmaModel) {
         try {
-            await this.props.dispatch(buscarAlunos({ filters }))
+            await this.props.dispatch(buscarTurmas({ filters }))
         } catch (error) {
             alert("Erro")
         }
@@ -39,13 +38,13 @@ class AlunoHome extends React.Component<Props> {
 
     async limparBusca() {
         await this.props.dispatch(reset("homeBusca"))
-        await this.props.dispatch(buscarAlunos(null))
+        await this.props.dispatch(buscarTurmas(null))
     }
 
     renderRows() {
-        const { alunos } = this.props;
+        const { turmas } = this.props;
 
-        if (!alunos || !alunos.length) {
+        if (!turmas || !turmas.length) {
             return <tr>
                 <td colSpan={4}>
                     Não há nenhum item para exibir!
@@ -53,14 +52,12 @@ class AlunoHome extends React.Component<Props> {
             </tr>
         }
 
-        return alunos.map(item => {
-            const dataRegistro = new Date(item.dataRegistro);
-            const dataComparacao = new Date();
-
-            return <tr onClick={e => history.push(`${ALUNOS_EDITAR_ROUTE}/${item._id}`)} style={{ cursor: 'pointer' }} key={item._id}>
+        return turmas.map(item => {
+            return <tr onClick={e => history.push(`${TURMAS_EDITAR_ROUTE}/${item._id}`)} style={{ cursor: 'pointer' }} key={item._id}>
                 <td>{item.nome}</td>
-                <td>{formatarCpfPessoa(item.cpf)}</td>
-                <td>{`Há ${distanceInWords(dataRegistro, dataComparacao, { locale: pt })}`}</td>
+                <td>{item.arteMarcial}</td>
+                <td>{item.localTreino}</td>
+                <td>{`Há ${distanceInWords(item.dataRegistro, new Date(), { locale: pt })}`}</td>
             </tr>
         })
     }
@@ -70,7 +67,7 @@ class AlunoHome extends React.Component<Props> {
             <Container>
                 <Row className="mb-2">
                     <Col>
-                        <Button color="success" onClick={e => history.push(ALUNOS_NOVO_ROUTE)}>Novo <FontAwesomeIcon icon="plus" /></Button>
+                        <Button color="success" onClick={e => history.push(TURMAS_NOVO_ROUTE)}>Novo <FontAwesomeIcon icon="plus" /></Button>
                     </Col>
                     <Col className="d-flex justify-content-end">
                         <Button color="info" id="btn-buscar" onClick={this.limparBusca.bind(this)} className="ml-2">Filtrar <FontAwesomeIcon icon="filter" /></Button>
@@ -79,7 +76,7 @@ class AlunoHome extends React.Component<Props> {
                 <UncontrolledCollapse toggler="btn-buscar">
                     <Row>
                         <Col>
-                            <AlunoHomeBuscaForm onSubmit={this.handleSubmit.bind(this) as any} />
+                            <TurmaHomeBuscaForm onSubmit={this.handleSubmit.bind(this) as any} />
                         </Col>
                     </Row>
                 </UncontrolledCollapse>
@@ -89,7 +86,8 @@ class AlunoHome extends React.Component<Props> {
                             <thead>
                                 <tr>
                                     <th>Nome</th>
-                                    <th>CPF</th>
+                                    <th>Arte marcial</th>
+                                    <th>Local de treino</th>
                                     <th>Criado</th>
                                 </tr>
                             </thead>
@@ -105,6 +103,6 @@ class AlunoHome extends React.Component<Props> {
 
 }
 
-const mapStateToProps = (state: ApplicationState) => state.aluno
+const mapStateToProps = (state: ApplicationState) => state.turma
 
-export default connect(mapStateToProps)(AlunoHome);
+export default connect(mapStateToProps)(TurmaHome);

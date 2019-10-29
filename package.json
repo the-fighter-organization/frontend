@@ -7,6 +7,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.9.0",
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@fortawesome/react-fontawesome": "^0.1.4",
+    "@sweetalert/with-react": "^0.1.1",
     "@types/jest": "24.0.11",
     "@types/node": "11.11.2",
     "@types/react": "16.8.7",
@@ -40,7 +41,7 @@
     "extends": "react-app"
   },
   "engines": {
-    "node":"10.X"
+    "node": "10.X"
   },
   "browserslist": [
     ">0.2%",

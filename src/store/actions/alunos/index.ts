@@ -3,10 +3,11 @@ import { FetchHandler } from "../../../config/fetch";
 import { AlunoReducerTypes } from "../../types/alunos";
 import history from "../../../config/history";
 import { ALUNOS_HOME_ROUTE } from "../../../components/route/alunos";
+import { IBuscaParameters } from '../../../models/busca';
 
 export function salvarAluno(payload: IAlunoModel) {
     return async dispatch => {
-        debugger
+
         const http = new FetchHandler();
         const response = await http.post('alunos', payload)
 
@@ -26,12 +27,15 @@ export function salvarAluno(payload: IAlunoModel) {
     }
 }
 
-export function buscarAlunos(busca: IAlunoModel) {
+export function buscarAlunos(busca: IBuscaParameters) {
     return async dispatch => {
-
         try {
+            if (!busca || !busca.select) {
+                busca = { ...busca, select: '_id nome cpf dataRegistro' }
+            }
+
             const http = new FetchHandler();
-            const response = await http.post('alunos/buscar', busca || {});
+            const response = await http.post('alunos/buscar', busca);
 
             const body = await response.json();
 

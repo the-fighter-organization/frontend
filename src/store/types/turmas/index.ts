@@ -1,0 +1,1 @@
+export type TurmaReducerTypes = "@turmas/fetch" | "@turmas/edit" | "@turmas/submit"
