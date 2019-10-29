@@ -40,7 +40,7 @@ class Login extends React.Component<Props> {
           </Row>
           <Row>
             <Col className="d-flex justify-content-center">
-              <Button outline className="ml-2" disabled={submitting || pristine} type="submit" color="success">
+              <Button outline className="ml-2" disabled={submitting} type="submit" color="success">
                 Login
               </Button>
             </Col>

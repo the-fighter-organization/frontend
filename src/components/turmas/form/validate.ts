@@ -1,4 +1,3 @@
-import { IAlunoModel } from '../../../models/Aluno';
 import { ITurmaModel } from '../../../models/Turma';
 
 export default (values: ITurmaModel) => {
@@ -18,7 +17,7 @@ export default (values: ITurmaModel) => {
     }
     // Responsáveis
     if (!values.colaboradores || !values.colaboradores.length) {
-        errors.responsaveis = { _error: 'Coleboradores: \nPelo menos um colaborador deve ser informado!' }
+        errors.colaboradores = { error: 'Colaboradores: \nPelo menos um colaborador deve ser informado!' }
     } else {
         values.colaboradores.forEach((item, index) => {
             let colaboradorErrors: string = null;

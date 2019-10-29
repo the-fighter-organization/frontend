@@ -43,7 +43,6 @@ class TurmaAlterar extends React.Component<Props> {
         if (!turmaEdit) {
             return <LoadingPage />
         }
-
         return <Container>
             <Row>
                 <Col>

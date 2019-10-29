@@ -15,6 +15,8 @@ import { connect } from 'react-redux';
 import { ApplicationState } from '../../store/reducers';
 import { WindowState } from '../../store/reducers/window';
 import TurmaRouter from '../turmas/TurmaRouter';
+import AulaRouter from '../aulas/AulaRouter';
+import classnames from 'classnames'
 
 interface Props extends WindowState {
 
@@ -35,7 +37,8 @@ const HomeRouter: React.SFC<Props> = ({ navbarTitle }) => {
 	}
 
 	const logout = () => {
-		CookieManager.remove();
+		CookieManager.remove("Authorization");
+		CookieManager.remove("User");
 		history.push("/login")
 	}
 	return (
@@ -45,7 +48,7 @@ const HomeRouter: React.SFC<Props> = ({ navbarTitle }) => {
 				<Sidebar sidebarActive={sidebarActive} />
 				{/* Page Content Holder */}
 				<div id="content">
-					<Navbar color="light" light expand="md" style={{ height: 50 }} className="mb-3">
+					<Navbar color="light" light expand="md" style={{ height: 50 }} className={`mb-2 ${classnames({ 'ml-5': sidebarActive })}`}>
 						<div className="container-fluid">
 							<button onClick={e => setSidebarActive(!sidebarActive)} type="button" id="sidebarCollapse" className={`navbar-btn${sidebarActive ? ' active' : ''}`}>
 								<span />
@@ -82,6 +85,7 @@ const HomeRouter: React.SFC<Props> = ({ navbarTitle }) => {
 					<Switch>
 						<PrivateRoute component={AlunoRouter} path="/alunos" />
 						<PrivateRoute component={TurmaRouter} path="/turmas" />
+						<PrivateRoute component={AulaRouter} path="/aulas" />
 						<PrivateRoute path="/conta" component={ContaRouter} />
 						<PrivateRoute component={HomeDashboard} path="/" />
 						<Redirect to={'/not-found'} />

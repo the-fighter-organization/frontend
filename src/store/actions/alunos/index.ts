@@ -7,7 +7,7 @@ import { IBuscaParameters } from '../../../models/busca';
 
 export function salvarAluno(payload: IAlunoModel) {
     return async dispatch => {
-        debugger
+
         const http = new FetchHandler();
         const response = await http.post('alunos', payload)
 

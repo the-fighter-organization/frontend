@@ -1,0 +1,1 @@
+export type AulaReducerTypes = "@aulas/fetch" | "@aulas/edit" | "@aulas/submit"

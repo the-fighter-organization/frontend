@@ -6,27 +6,27 @@ import { reduxForm } from 'redux-form';
 
 import history from '../../../config/history';
 import { reduxFormOnSubmitFail } from '../../../config/reduxForm';
-import { ITurmaModel } from '../../../models/Turma';
-import { TurmaState } from '../../../store/reducers/turmas';
-import TurmaFormTabAdministrativo from './tabs/TurmaFormTabAdministrativo';
-import TurmaFormTabAlunos from './tabs/TurmaFormTabAlunos';
-import TurmaFormTabDadosTurma from './tabs/TurmaFormTabDadosTurma';
+import { IAulaModel, ITurmaModel } from '../../../models/Turma';
+import { AulaState } from '../../../store/reducers/aulas';
+import AulaFormTabAdministrativo from './tabs/AulaFormTabAdministrativo';
+import AulaFormTabDadosAula from './tabs/AulaFormTabDadosAula';
 import validate from './validate';
+import AulaFormTabPresencas from './tabs/AulaFormTabPresencas';
 
-interface Props extends TurmaState {
+interface Props extends AulaState {
   edit?: boolean
   dispatch?: any
   handleSubmit?: any
   pristine?: boolean
   submitting?: boolean
-  initialValues?: ITurmaModel
+  initialValues?: IAulaModel
 }
 
 interface State {
   activeTab: string
 }
 
-class TurmaForm extends React.Component<Props, State> {
+class AulaForm extends React.Component<Props, State> {
   constructor(props) {
     super(props);
 
@@ -47,7 +47,7 @@ class TurmaForm extends React.Component<Props, State> {
       <Container fluid>
         <form onSubmit={handleSubmit} noValidate>
           <Nav tabs>
-            {/* Dados da turma */}
+            {/* Dados da aula */}
             <NavItem>
               <NavLink
                 className={`${activeTab === '1' ? 'active' : ''}`}
@@ -56,20 +56,22 @@ class TurmaForm extends React.Component<Props, State> {
                 Dados básicos
                   </NavLink>
             </NavItem>
-            {/* Alunos */}
-            <NavItem>
-              <NavLink
-                className={`${activeTab === '2' ? 'active' : ''}`}
-                onClick={() => { this.setActiveTab('2'); }}
-              >
-                Alunos
+            {/* Aulas */}
+            {initialValues.turmaId &&
+              <NavItem>
+                <NavLink
+                  className={`${activeTab === '2' ? 'active' : ''}`}
+                  onClick={() => { this.setActiveTab('2'); }}
+                >
+                  Presenças
                   </NavLink>
-            </NavItem>
+              </NavItem>
+            }
             {/* Administrativo */}
             {initialValues && initialValues._id && <NavItem>
               <NavLink
                 className={classNames({ active: activeTab === '3', 'text-white': activeTab !== '3', 'bg-danger': activeTab !== '3' })}
-                onClick={() => { this.setActiveTab('4'); }}
+                onClick={() => { this.setActiveTab('3'); }}
               >
                 Administrativo
               </NavLink>
@@ -77,14 +79,18 @@ class TurmaForm extends React.Component<Props, State> {
           </Nav>
           <TabContent activeTab={activeTab}>
             <TabPane tabId="1">
-              <TurmaFormTabDadosTurma />
+              <AulaFormTabDadosAula isEdit={initialValues._id != undefined} />
             </TabPane>
-            <TabPane tabId="2">
-              <TurmaFormTabAlunos />
-            </TabPane>
-            <TabPane tabId="3">
-              <TurmaFormTabAdministrativo initialValues={initialValues} />
-            </TabPane>
+            {initialValues.turmaId &&
+              <React.Fragment>
+                <TabPane tabId="2">
+                  <AulaFormTabPresencas />
+                </TabPane>
+                <TabPane tabId="3">
+                  <AulaFormTabAdministrativo initialValues={initialValues} />
+                </TabPane>
+              </React.Fragment>
+            }
           </TabContent>
           <hr />
           <Row>
@@ -93,7 +99,7 @@ class TurmaForm extends React.Component<Props, State> {
                 Voltar <FontAwesomeIcon icon="arrow-left" />
               </Button>
               <Button outline className="ml-2" disabled={submitting || pristine} type="submit" color="success">
-                Salvar  <FontAwesomeIcon icon="save" />
+                Salvar <FontAwesomeIcon icon="save" />
               </Button>
             </Col>
           </Row>
@@ -104,7 +110,7 @@ class TurmaForm extends React.Component<Props, State> {
 }
 
 export default reduxForm({
-  form: 'turma',
+  form: 'aula',
   validate: validate as any,
   onSubmitFail: reduxFormOnSubmitFail
-})(TurmaForm as any);
+})(AulaForm as any);

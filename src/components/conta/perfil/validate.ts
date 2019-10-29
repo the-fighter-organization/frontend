@@ -10,6 +10,6 @@ export default (values: IUserModel) => {
     if (!values.sobrenome || !values.sobrenome.trim()) {
         errors.sobrenome = 'O sobrenome é requerido!';
     }
-    
+
     return errors;
 }

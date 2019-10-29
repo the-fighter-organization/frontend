@@ -1,42 +1,40 @@
-import { IAlunoModel } from "../../../models/Aluno";
-import { FetchHandler } from "../../../config/fetch";
-import history from "../../../config/history";
-import { TURMAS_HOME_ROUTE } from '../../../components/route/turma';
-import { TurmaReducerTypes } from '../../types/turmas';
-import { ITurmaModel } from '../../../models/Turma';
-import { IBuscaParameters } from '../../../models/busca';
+import { AULAS_HOME_ROUTE } from '../../../components/route/aula';
+import { FetchHandler } from '../../../config/fetch';
+import history from '../../../config/history';
+import { IAulaModel } from '../../../models/Turma';
+import { AulaReducerTypes } from '../../types/aulas';
 
-const BASE_CONTROLLER = "turmas"
+const BASE_CONTROLLER = "aulas"
 
-export function salvarTurma(payload: IAlunoModel) {
+export function salvarAula(payload: IAulaModel) {
     return async dispatch => {
-
+        const { turma, turmaId, ...objRequest } = payload;
         const http = new FetchHandler();
-        const response = await http.post(BASE_CONTROLLER, payload)
+        const response = await http.post(`${BASE_CONTROLLER}/${turmaId}`, objRequest)
 
         const body = await response.json();
 
         if (!response.ok) {
             alert(`Ocorreu o seguinte erro: ${body ? body.message : null}`)
+            return;
         }
 
         alert("Salvo com sucesso!")
-        history.push(TURMAS_HOME_ROUTE)
+        history.push(AULAS_HOME_ROUTE)
 
         dispatch({
-            type: "@turmas/submit" as TurmaReducerTypes
+            type: "@aulas/submit" as AulaReducerTypes
         })
-
     }
 }
 
-const initialBusca = { select: "_id nome arteMarcial localTreino dataRegistro" } as IBuscaParameters;
-
-export function buscarTurmas(busca: IBuscaParameters) {
+export function buscarAulas(busca: IAulaModel) {
     return async dispatch => {
+
         try {
             const http = new FetchHandler();
-            const response = await http.post(`${BASE_CONTROLLER}/buscar`, { ...initialBusca, ...busca });
+            // const response = await http.post(`${BASE_CONTROLLER}/buscar`, { filters: busca || {}, select: "_id nome arteMarcial localTreino dataRegistro" });
+            const response = await http.get(`${BASE_CONTROLLER}`);
             const body = await response.json();
 
             if (!response.ok) {
@@ -44,7 +42,7 @@ export function buscarTurmas(busca: IBuscaParameters) {
             }
 
             dispatch({
-                type: "@turmas/fetch" as TurmaReducerTypes,
+                type: "@aulas/fetch" as AulaReducerTypes,
                 payload: body
             })
         }
@@ -54,12 +52,12 @@ export function buscarTurmas(busca: IBuscaParameters) {
     }
 }
 
-export function getTurma(id: string) {
+export function getAula(turmaId: string, id: string) {
     return async dispatch => {
 
         try {
             const http = new FetchHandler();
-            const response = await http.get(`${BASE_CONTROLLER}/${id}`);
+            const response = await http.get(`${BASE_CONTROLLER}/${turmaId}/${id}`);
 
             const body = await response.json();
 
@@ -68,7 +66,7 @@ export function getTurma(id: string) {
             }
 
             dispatch({
-                type: "@turmas/edit" as TurmaReducerTypes,
+                type: "@aulas/edit" as AulaReducerTypes,
                 payload: body
             })
         }
@@ -78,12 +76,12 @@ export function getTurma(id: string) {
     }
 }
 
-export function removerTurma(id: string) {
+export function removerAula(turmaId: string, id: string) {
     return async dispatch => {
 
         try {
             const http = new FetchHandler();
-            const response = await http.delete(`${BASE_CONTROLLER}/${id}`);
+            const response = await http.delete(`${BASE_CONTROLLER}/${turmaId}/${id}`);
 
             const body = await response.json();
 

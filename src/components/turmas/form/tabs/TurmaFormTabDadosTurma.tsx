@@ -13,7 +13,7 @@ const renderColaboradoresField: React.SFC<any> = ({ fields, meta: { error } }) =
             </Button>
         </div>
         <ListGroup>
-            {(fields || []).map((field, index) => <ListGroupItem>
+            {(fields || []).map((field, index) => <ListGroupItem key={`colaborador-field-${index}`}>
                 <Row>
                     <Col xl="10">
                         <Field component={renderInput} name={field} type="text" label={`Colaborador ${index + 1}`} />

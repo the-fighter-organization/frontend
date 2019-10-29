@@ -52,7 +52,7 @@ class AlunoHome extends React.Component<Props> {
                 </td>
             </tr>
         }
-        debugger
+
         return alunos.map(item => {
             const dataRegistro = new Date(item.dataRegistro);
             const dataComparacao = new Date();
@@ -70,7 +70,7 @@ class AlunoHome extends React.Component<Props> {
             <Container>
                 <Row className="mb-2">
                     <Col>
-                        <Button color="success" onClick={e => history.push(ALUNOS_NOVO_ROUTE)}>Novo</Button>
+                        <Button color="success" onClick={e => history.push(ALUNOS_NOVO_ROUTE)}>Novo <FontAwesomeIcon icon="plus" /></Button>
                     </Col>
                     <Col className="d-flex justify-content-end">
                         <Button color="info" id="btn-buscar" onClick={this.limparBusca.bind(this)} className="ml-2">Filtrar <FontAwesomeIcon icon="filter" /></Button>

@@ -30,10 +30,10 @@ class ContaPerfilForm extends React.Component<Props, State> {
   render() {
     const { handleSubmit, pristine, submitting, logoEmpresa, initialValues } = this.props;
 
-    if(!initialValues){
-      return <LoadingPage/>
+    if (!initialValues) {
+      return <LoadingPage />
     }
-    
+
     return (
       <Container fluid>
         <form onSubmit={handleSubmit} noValidate>
@@ -42,7 +42,7 @@ class ContaPerfilForm extends React.Component<Props, State> {
               <div className="d-flex justify-content-center mb-2">
                 <img style={{ borderRadius: "50%", display: logoEmpresa ? 'unset' : 'none' }} height={200} width={200} src={logoEmpresa} alt="Foto de perfil" />
               </div>
-              <Field component={renderFileInput} name="logoEmpresa" label="Selecinoe uma foto" accept="image/png, image/jpeg, image/jpg" />
+              <Field component={renderFileInput} name="logoEmpresa" label="Selecione um logotipo" accept="image/png, image/jpeg, image/jpg" />
             </Col>
             <Col>
               <Col>

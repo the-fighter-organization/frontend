@@ -8,9 +8,10 @@ import { IAlunoModel } from '../../../../models/Aluno';
 import { buscarAlunos } from '../../../../store/actions/alunos';
 import { ApplicationState } from '../../../../store/reducers';
 import { AlunoState } from '../../../../store/reducers/alunos';
+import { formatarCpfPessoa } from '../../../../util/string';
 import { renderInput } from '../../../template/input/InputTemplate';
 
-interface IRenderAlunosProps extends AlunoState {
+interface IRenderPresencasProps extends AlunoState {
     fields: any;
     meta: any;
     dispatch: (func: any) => Promise<any>
@@ -19,26 +20,24 @@ interface IRenderAlunosProps extends AlunoState {
 const renderAlunosOptions = (alunos: IAlunoModel[], index: number) => (
     <React.Fragment>
         <option>Selecione...</option>
-        {alunos.map(aluno => <option key={`option-${index}-${aluno._id}`} value={aluno._id}>
-            {aluno.nome}
-        </option>)}
+        {alunos.map(aluno => <option key={`option-${index}-${aluno._id}`} value={aluno._id}>{aluno.nome}</option>)}
     </React.Fragment>
 )
 
-const renderAlunos = ({ fields, meta: { error, submitFailed }, alunos }: IRenderAlunosProps) => {
+const renderPresencas = ({ fields, meta: { error, submitFailed }, alunos }: IRenderPresencasProps) => {
     return (
         <ListGroup>
-            <div className="mb-2">
+            {/* <div className="mb-2">
                 <Button color="info" onClick={() => fields.push()}>
                     Novo <FontAwesomeIcon icon="plus" />
                 </Button>
-            </div>
+            </div> */}
             {fields.map((field, index) => (
                 <ListGroupItem key={index}>
                     <Row>
                         <Col lg="6" xl="6" md="6" sm="12">
                             <Field
-                                name={field}
+                                name={`${field}.aluno`}
                                 type="select"
                                 component={renderInput}
                                 label={`Aluno ${index + 1}`}
@@ -47,15 +46,22 @@ const renderAlunos = ({ fields, meta: { error, submitFailed }, alunos }: IRender
                                 {renderAlunosOptions(alunos, index)}
                             </Field>
                         </Col>
+                        <Col xl="3" sm="12" className="d-flex align-self-center">
+                            <Field
+                                name={`${field}.presente`}
+                                type="checkbox"
+                                label="Presente?"
+                                component={renderInput} />
+                        </Col>
 
-                        <Col className="d-flex align-self-center" lg="3" xl="3" md="6" sm="12">
+                        {/* <Col className="d-flex align-self-center" xl="3" sm="12">
                             <Button
                                 color="danger"
                                 title="Remover aluno"
                                 onClick={() => fields.remove(index)}
                             >Remover <FontAwesomeIcon icon="trash" />
                             </Button>
-                        </Col>
+                        </Col> */}
                     </Row>
                 </ListGroupItem>
             ))
@@ -66,15 +72,15 @@ const renderAlunos = ({ fields, meta: { error, submitFailed }, alunos }: IRender
 }
 
 const mapStateToProps = (state: ApplicationState) => state.aluno
-const renderAlunosWithRedux = connect(mapStateToProps)(renderAlunos as any);
+const renderAlunosWithRedux = connect(mapStateToProps)(renderPresencas as any);
 
 const TurmaFormTabAlunos = props => {
-    props.dispatch(buscarAlunos({ select: '_id nome' }))
+    props.dispatch(buscarAlunos(null))
     return (
         <Container className="mt-3">
             <Row>
                 <Col>
-                    <FieldArray name="alunos" component={renderAlunosWithRedux as any} />
+                    <FieldArray name="presencas" component={renderAlunosWithRedux as any} />
                 </Col>
             </Row>
         </Container>

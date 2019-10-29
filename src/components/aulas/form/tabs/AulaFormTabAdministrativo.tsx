@@ -5,33 +5,41 @@ import { Button, Col, Container, Row } from 'reactstrap';
 import { Field } from 'redux-form';
 
 import history from '../../../../config/history';
-import { ITurmaModel } from '../../../../models/Turma';
-import { removerTurma } from '../../../../store/actions/turmas';
+import { IAulaModel } from '../../../../models/Turma';
+import { removerAula } from '../../../../store/actions/aulas';
 import DateHandler from '../../../../util/date';
-import { TURMAS_HOME_ROUTE } from '../../../route/turma';
+import { AULAS_HOME_ROUTE } from '../../../route/aula';
 import { renderInput } from '../../../template/input/InputTemplate';
 
 
 interface Props {
-    initialValues?: ITurmaModel
+    initialValues?: IAulaModel
     dispatch?: any
 }
 
-const TurmaFormTabAdministrativo = (props: Props) => {
+const AulaFormTabAdministrativo = (props: Props) => {
     const { initialValues, dispatch } = props;
+
+    console.log(initialValues)
 
     async function remover() {
         if (!initialValues) {
             return
         }
 
-        if (!window.confirm(`Tem certeza de que deseja remover ${initialValues.nome}?`)) {
+        const { turmaId } = initialValues;
+
+        if (!turmaId) {
+            alert("Não foi possível excluir, a turma da aula não foi encontrada!")
+        }
+
+        if (!window.confirm(`Tem certeza de que deseja remover a aula?`)) {
             return
         }
 
         try {
-            await dispatch(removerTurma(initialValues._id))
-            history.push(TURMAS_HOME_ROUTE)
+            await dispatch(removerAula(turmaId, initialValues._id))
+            history.push(AULAS_HOME_ROUTE)
         } catch (error) {
             alert(`Erro: ${error}`)
         }
@@ -54,4 +62,4 @@ const TurmaFormTabAdministrativo = (props: Props) => {
     )
 }
 
-export default connect()(TurmaFormTabAdministrativo)
+export default connect()(AulaFormTabAdministrativo)

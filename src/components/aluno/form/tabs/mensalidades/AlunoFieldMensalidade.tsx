@@ -14,8 +14,8 @@ const getSituacoesMensalidades = () => {
     return <React.Fragment>
         <option>Selecione...</option>
         {
-            TODAS_SITUACOES_MENSALIDADES.map(item => (
-                <option value={item}>{item}</option>
+            TODAS_SITUACOES_MENSALIDADES.map((item, index) => (
+                <option key={`situacao-mensalidade-${index}`} value={item}>{item}</option>
             ))
         }
     </React.Fragment>
@@ -28,7 +28,6 @@ interface Props {
 }
 
 const renderMensalidades: React.SFC<Props> = ({ fields, meta: { error }, responsaveis }) => {
-    console.log(fields)
     return <React.Fragment>
         <div className="mb-2">
             <Button color="info" onClick={() => fields.push()}>

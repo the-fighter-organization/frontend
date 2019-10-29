@@ -9,7 +9,7 @@ import { renderInput } from '../../template/input/InputTemplate';
 const AlunoHomeBuscaFormCommon = ({ handleSubmit, dispatch }: InjectedFormProps<{}, {}, string> | any) => {
 
     const updateBusca = debounce(() => dispatch(submit("homeBusca")), 1000);
-    
+
     return (
         <form onSubmit={handleSubmit}>
             <Row>
@@ -17,7 +17,7 @@ const AlunoHomeBuscaFormCommon = ({ handleSubmit, dispatch }: InjectedFormProps<
                     <Field component={renderInput} onChange={updateBusca} label="Nome" type="search" name="nome" placeholder="Ex: João Silva" />
                 </Col>
                 <Col md="6" sm="12">
-                    <Field component={renderInput} onChange={updateBusca} label="CPF" type="search" name="cpf" placeholder="Ex: XXX.XXX.XXX-XX" />
+                    <Field component={renderInput} onChange={updateBusca} label="CPF (Sem dígitos)" type="search" name="cpf" placeholder="Ex: XXXXXXXXXXX" />
                 </Col>
             </Row>
         </form>

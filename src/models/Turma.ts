@@ -1,6 +1,7 @@
 import { IAlunoModel } from './Aluno';
 
 export interface ITurmaModel {
+  alunos: IAlunoModel[];
   _id: string;
   nome: string;
   arteMarcial: string;
@@ -13,14 +14,19 @@ export interface ITurmaModel {
 }
 
 export interface IAulaModel {
+  turmaId: string;
+  turma: ITurmaModel;
+  _id: string;
   dataRegistro: Date;
   dataAula: Date;
   dataChamada: Date;
   presencas: IAulaPresencaModel[];
+  planoAula: string[];
 }
 
 export interface IAulaPresencaModel {
-  aluno: IAlunoModel
+  aluno: string;
+  presente: boolean;
   observacoesPositivas: string[];
   observacoesNegativas: string[];
   nota: number;

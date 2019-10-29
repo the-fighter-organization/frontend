@@ -9,8 +9,8 @@ export const getFormasPagamento = () => {
     return <React.Fragment>
         <option>Selecione...</option>
         {
-            TODAS_FORMAS_PAGAMENTO.map(item => (
-                <option value={item}>{item}</option>
+            TODAS_FORMAS_PAGAMENTO.map((item, index) => (
+                <option key={`forma-pagamento-${index}`} value={item}>{item}</option>
             ))
         }
     </React.Fragment>

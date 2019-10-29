@@ -3,9 +3,9 @@ import { ContaReducerTypes } from "../../types/conta";
 import { IUserModel } from "../../../models/Conta";
 import { CONTA_CONFIRMACAO_SENHA_ROUTE } from "../../../components/route/conta";
 
-export function getPerfilUsuario(payload?:any) {
+export function getPerfilUsuario(payload?: any) {
     return async dispatch => {
-        debugger
+
         try {
             const http = new FetchHandler();
             const response = await http.get(`usuarios/current-user`);
@@ -29,7 +29,7 @@ export function getPerfilUsuario(payload?:any) {
 
 export function editarPerfil(payload: IUserModel) {
     return async dispatch => {
-        
+
         try {
             const http = new FetchHandler();
             const response = await http.post(`usuarios/editar-perfil`, payload);
@@ -48,7 +48,7 @@ export function editarPerfil(payload: IUserModel) {
 
 export function editarSenha(payload: any) {
     return async dispatch => {
-        
+
         try {
             const http = new FetchHandler();
             http.authorized = false;
@@ -69,10 +69,10 @@ export function editarSenha(payload: any) {
 
 export function novaConta(payload: any) {
     return async dispatch => {
-        
+
         try {
             const http = new FetchHandler();
-            http.authorized = false;            
+            http.authorized = false;
             payload.linkConfirmacao = `${window.location.protocol}//${window.location.host}${CONTA_CONFIRMACAO_SENHA_ROUTE}`;
             const response = await http.post(`usuarios/novo`, payload);
 
@@ -89,11 +89,11 @@ export function novaConta(payload: any) {
 }
 
 export function confirmarPerfil({ id, codigoConfirmacao }) {
-    return async dispatch => {        
+    return async dispatch => {
         try {
-            debugger
+
             const http = new FetchHandler();
-            http.authorized = false;            
+            http.authorized = false;
             const response = await http.get(`usuarios/confirmar-perfil/${id}/${codigoConfirmacao}`);
 
             const body = await response.json();
