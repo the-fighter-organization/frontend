@@ -57,7 +57,7 @@ class AlunoHome extends React.Component<Props> {
             const dataRegistro = new Date(item.dataRegistro);
             const dataComparacao = new Date();
 
-            return <tr onClick={e => history.push(`${ALUNOS_EDITAR_ROUTE}/${item._id}`)} style={{ cursor: 'pointer' }} key={item._id}>
+            return <tr onClick={e => history.push(`${ALUNOS_EDITAR_ROUTE}/${item._id}/1`)} style={{ cursor: 'pointer' }} key={item._id}>
                 <td>{item.nome}</td>
                 <td>{formatarCpfPessoa(item.cpf)}</td>
                 <td>{`Há ${distanceInWords(dataRegistro, dataComparacao, { locale: pt })}`}</td>

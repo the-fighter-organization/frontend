@@ -78,6 +78,29 @@ export function getAluno(id: string) {
     }
 }
 
+export function getAlunosComMensalidadesVencidas() {
+    return async dispatch => {
+        try {
+            const http = new FetchHandler();
+            const response = await http.get("alunos/buscar-mensalidades-vencidas");
+
+            const body = await response.json();
+
+            if (!response.ok) {
+                alert(`Ocorreu o seguinte erro: ${body ? JSON.stringify(body) : null}`)
+            }
+
+            dispatch({
+                type: "@alunos/fetch-mensalidades-vencidas" as AlunoReducerTypes,
+                payload: body
+            })
+        }
+        catch (e) {
+            throw e;
+        }
+    }
+}
+
 export function removerAluno(id: string) {
     return async dispatch => {
 
