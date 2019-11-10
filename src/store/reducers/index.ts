@@ -5,8 +5,10 @@ import contaReducer, { ContaState } from './conta';
 import windowReducer, { WindowState } from './window';
 import turmaReducer, { TurmaState } from './turmas';
 import aulaReducer, { AulaState } from './aulas';
+import configuracaoReducer, { ConfiguracaoState } from './configuracoes';
 
 export interface ApplicationState {
+  configuracao: ConfiguracaoState;
   aula: AulaState;
   aluno: AlunoState,
   turma: TurmaState,
@@ -20,7 +22,8 @@ const rootReducer = combineReducers({
   aluno: alunoReducer,
   turma: turmaReducer,
   conta: contaReducer,
-  form: formReducer
+  form: formReducer,
+  configuracao: configuracaoReducer
 })
 
 export default rootReducer;

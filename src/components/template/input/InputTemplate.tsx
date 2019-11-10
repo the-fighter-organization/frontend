@@ -50,7 +50,7 @@ export function getFieldMask(mask: MaskTypes, places: number = 0): any {
       });
     case "moedaBRL":
       return createNumberMask({
-        suffix: " BRL",
+        suffix: " R$",
         decimalPlaces: places
       });
     case "moedaUSD":

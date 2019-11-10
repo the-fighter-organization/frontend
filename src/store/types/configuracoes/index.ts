@@ -1,0 +1,1 @@
+export type ConfiguracaoReducerTypes = "@configuracoes/fetch" | "@configuracoes/edit" | "@configuracoes/submit"

@@ -1,0 +1,1 @@
+export const CONFIGURACOES_HOME_ROUTE = '/configuracoes'

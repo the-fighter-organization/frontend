@@ -14,7 +14,7 @@ export function salvarAluno(payload: IAlunoModel) {
         const body = await response.json();
 
         if (!response.ok) {
-            throw new Error(`Ocorreu o seguinte erro: ${body ? body.toString() : null}`)
+            throw new Error(`Ocorreu o seguinte erro: ${body ? JSON.stringify(body) : null}`)
         }
 
         alert("Salvo com sucesso!")
@@ -40,7 +40,7 @@ export function buscarAlunos(busca: IBuscaParameters) {
             const body = await response.json();
 
             if (!response.ok) {
-                alert(`Ocorreu o seguinte erro: ${body ? body.toString() : null}`)
+                alert(`Ocorreu o seguinte erro: ${body ? JSON.stringify(body) : null}`)
             }
 
             dispatch({
@@ -64,7 +64,7 @@ export function getAluno(id: string) {
             const body = await response.json();
 
             if (!response.ok) {
-                alert(`Ocorreu o seguinte erro: ${body ? body.toString() : null}`)
+                alert(`Ocorreu o seguinte erro: ${body ? JSON.stringify(body) : null}`)
             }
 
             dispatch({
@@ -88,7 +88,7 @@ export function removerAluno(id: string) {
             const body = await response.json();
 
             if (!response.ok) {
-                alert(`Ocorreu o seguinte erro: ${body ? body.toString() : null}`)
+                alert(`Ocorreu o seguinte erro: ${body ? JSON.stringify(body) : null}`)
             }
         }
         catch (e) {

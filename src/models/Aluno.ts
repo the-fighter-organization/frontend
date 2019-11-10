@@ -90,6 +90,9 @@ export interface IAlunoModel {
     email: string;
     // Filiação e responsáveis
     responsaveis: [IResponsavel];
+    // Filiação e responsáveis
+    mensalidades: [IAlunoMensalidade];
+    bolsista: boolean;
     // Endereço  
     endereco: IEndereco,
     // Escolaridade
