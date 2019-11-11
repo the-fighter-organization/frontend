@@ -18,9 +18,9 @@ export default (state = initialState, action): AlunoState => {
         case "@alunos/submit":
             return { ...state, alunoEdit: null }
         case "@alunos/fetch":
-            return { ...state, alunos: action.payload }
+            return { ...state, alunos: action.payload || [] }
         case "@alunos/fetch-mensalidades-vencidas":
-            return { ...state, alunosMensalidadesVencidas: action.payload }
+            return { ...state, alunosMensalidadesVencidas: action.payload || [] }
         case "@alunos/edit":
             return { ...state, alunoEdit: action.payload }
         default:

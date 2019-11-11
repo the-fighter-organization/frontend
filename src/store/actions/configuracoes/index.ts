@@ -13,7 +13,8 @@ export function salvarConfiguracao(payload: IConfiguracao) {
         const body = await response.json();
 
         if (!response.ok) {
-            throw new Error(`Ocorreu o seguinte erro: ${body ? JSON.stringify(body) : null}`)
+            await FetchHandler.tratarBodyResponse(response, body);
+            return;
         }
 
         alert("Salvo com sucesso!")
@@ -37,7 +38,8 @@ export function getConfiguracao() {
             const body = await response.json();
 
             if (!response.ok) {
-                alert(`Ocorreu o seguinte erro: ${body ? JSON.stringify(body) : null}`)
+                await FetchHandler.tratarBodyResponse(response, body);
+                return;
             }
 
             dispatch({

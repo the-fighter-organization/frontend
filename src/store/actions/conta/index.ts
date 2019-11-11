@@ -13,7 +13,8 @@ export function getPerfilUsuario(payload?: any) {
             const body = await response.json();
 
             if (!response.ok) {
-                alert(`Ocorreu o seguinte erro: ${body ? JSON.stringify(body) : null}`)
+                await FetchHandler.tratarBodyResponse(response, body);
+                return;
             }
 
             dispatch({
@@ -37,7 +38,8 @@ export function editarPerfil(payload: IUserModel) {
             const body = await response.json();
 
             if (!response.ok) {
-                alert(`Ocorreu o seguinte erro: ${body ? JSON.stringify(body) : null}`)
+                await FetchHandler.tratarBodyResponse(response, body);
+                return;
             }
         }
         catch (e) {
@@ -58,7 +60,8 @@ export function editarSenha(payload: any) {
             const body = await response.json();
 
             if (!response.ok) {
-                alert(`Ocorreu o seguinte erro: ${body ? JSON.stringify(body) : null}`)
+                await FetchHandler.tratarBodyResponse(response, body);
+                return;
             }
         }
         catch (e) {
@@ -79,7 +82,8 @@ export function novaConta(payload: any) {
             const body = await response.json();
 
             if (!response.ok) {
-                alert(`Ocorreu o seguinte erro: ${body ? JSON.stringify(body) : null}`)
+                await FetchHandler.tratarBodyResponse(response, body);
+                return;
             }
         }
         catch (e) {
@@ -99,7 +103,8 @@ export function confirmarPerfil({ id, codigoConfirmacao }) {
             const body = await response.json();
 
             if (!response.ok) {
-                alert(`Ocorreu o seguinte erro: ${body ? JSON.stringify(body) : null}`)
+                await FetchHandler.tratarBodyResponse(response, body);
+                return;
             }
         }
         catch (e) {

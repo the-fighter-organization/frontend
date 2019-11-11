@@ -15,7 +15,7 @@ export function salvarAula(payload: IAulaModel) {
         const body = await response.json();
 
         if (!response.ok) {
-            alert(`Ocorreu o seguinte erro: ${body ? body.message : null}`)
+            await FetchHandler.tratarBodyResponse(response, body);
             return;
         }
 
@@ -38,7 +38,8 @@ export function buscarAulas(busca: any) {
             const body = await response.json();
 
             if (!response.ok) {
-                alert(`Ocorreu o seguinte erro: ${body ? body.message : null}`)
+                await FetchHandler.tratarBodyResponse(response, body);
+                return;
             }
 
             dispatch({
@@ -62,7 +63,8 @@ export function getAula(turmaId: string, id: string) {
             const body = await response.json();
 
             if (!response.ok) {
-                alert(`Ocorreu o seguinte erro: ${body ? body.message : null}`)
+                await FetchHandler.tratarBodyResponse(response, body);
+                return;
             }
 
             dispatch({
@@ -86,7 +88,8 @@ export function removerAula(turmaId: string, id: string) {
             const body = await response.json();
 
             if (!response.ok) {
-                alert(`Ocorreu o seguinte erro: ${body ? body.message : null}`)
+                await FetchHandler.tratarBodyResponse(response, body);
+                return;
             }
         }
         catch (e) {

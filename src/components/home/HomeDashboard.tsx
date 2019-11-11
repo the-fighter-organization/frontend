@@ -10,23 +10,36 @@ import { ALUNOS_EDITAR_ROUTE } from '../route/alunos';
 
 interface IHomeDashboardProps extends AlunoState {
     dispatch: any;
+    getAlunosComMensalidadesVencidas: typeof getAlunosComMensalidadesVencidas;
+    navbarTitleChange: typeof navbarTitleChange;
 }
 
-const HomeDashboard = ({ dispatch, alunosMensalidadesVencidas }: IHomeDashboardProps) => {
+const HomeDashboard = ({ getAlunosComMensalidadesVencidas, navbarTitleChange, alunosMensalidadesVencidas }: IHomeDashboardProps) => {
     useEffect(() => {
-        dispatch(navbarTitleChange("Dashboard"))
-        dispatch(getAlunosComMensalidadesVencidas())
+        navbarTitleChange("Dashboard")
+        try {
+            debugger
+            getAlunosComMensalidadesVencidas()
+        } catch (error) {
+            debugger
+            alert(error)
+        }
     })
 
-    const renderAlunosComMensalidadesVencidas = () => (alunosMensalidadesVencidas
-        .map((alunoMensalidade, index) => (
-            <Link key={`aluno-mensalidade-vencida-${index}`} to={`${ALUNOS_EDITAR_ROUTE}/${alunoMensalidade._id}/5`}>
-                <ListGroupItem>
-                    {alunoMensalidade.nome}
-                </ListGroupItem>
-            </Link>
-        ))
-    )
+    const renderAlunosComMensalidadesVencidas = () => {
+        debugger
+        if (!alunosMensalidadesVencidas) {
+            return <ListGroupItem>Não há alunos com a mensalidade vencida.</ListGroupItem>
+        }
+        return (alunosMensalidadesVencidas)
+            .map((alunoMensalidade, index) => (
+                <Link key={`aluno-mensalidade-vencida-${index}`} to={`${ALUNOS_EDITAR_ROUTE}/${alunoMensalidade._id}/5`}>
+                    <ListGroupItem>
+                        {alunoMensalidade.nome}
+                    </ListGroupItem>
+                </Link>
+            ));
+    }
 
     return (
         <Container>
@@ -48,5 +61,9 @@ const HomeDashboard = ({ dispatch, alunosMensalidadesVencidas }: IHomeDashboardP
 }
 
 const mapStateToProps = (state: ApplicationState) => state.aluno;
+const mapDispatchToProps = dispatch => ({
+    getAlunosComMensalidadesVencidas: () => dispatch(getAlunosComMensalidadesVencidas()),
+    navbarTitleChange: (payload: string) => navbarTitleChange(payload)
+})
 
-export default connect(mapStateToProps)(HomeDashboard)
+export default connect(mapStateToProps, mapDispatchToProps)(HomeDashboard)

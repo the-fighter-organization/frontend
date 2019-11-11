@@ -25,7 +25,11 @@ class AlunoHome extends React.Component<Props> {
     async componentWillMount() {
         const { dispatch } = this.props;
 
-        await dispatch(buscarAlunos({ filters: null }))
+        try {
+            await dispatch(buscarAlunos({ filters: null }))
+        } catch (error) {
+            alert(error)
+        }
         await dispatch(navbarTitleChange("Alunos"))
     }
 
@@ -38,8 +42,12 @@ class AlunoHome extends React.Component<Props> {
     }
 
     async limparBusca() {
-        await this.props.dispatch(reset("homeBusca"))
-        await this.props.dispatch(buscarAlunos(null))
+        await this.props.dispatch(reset("homeBusca"));
+        try {
+            await this.props.dispatch(buscarAlunos(null))
+        } catch (error) {
+            alert(error)
+        }
     }
 
     renderRows() {
@@ -105,6 +113,6 @@ class AlunoHome extends React.Component<Props> {
 
 }
 
-const mapStateToProps = (state: ApplicationState) => state.aluno
+const mapStateToProps = (state: ApplicationState) => state.aluno;
 
 export default connect(mapStateToProps)(AlunoHome);
