@@ -17,7 +17,8 @@ export function salvarTurma(payload: IAlunoModel) {
         const body = await response.json();
 
         if (!response.ok) {
-            alert(`Ocorreu o seguinte erro: ${body ? body.message : null}`)
+            await FetchHandler.tratarBodyResponse(response, body);
+            return;
         }
 
         alert("Salvo com sucesso!")
@@ -40,7 +41,8 @@ export function buscarTurmas(busca: IBuscaParameters) {
             const body = await response.json();
 
             if (!response.ok) {
-                alert(`Ocorreu o seguinte erro: ${body ? body.message : null}`)
+                await FetchHandler.tratarBodyResponse(response, body);
+                return;
             }
 
             dispatch({
@@ -64,7 +66,8 @@ export function getTurma(id: string) {
             const body = await response.json();
 
             if (!response.ok) {
-                alert(`Ocorreu o seguinte erro: ${body ? body.message : null}`)
+                await FetchHandler.tratarBodyResponse(response, body);
+                return;
             }
 
             dispatch({
@@ -88,7 +91,8 @@ export function removerTurma(id: string) {
             const body = await response.json();
 
             if (!response.ok) {
-                alert(`Ocorreu o seguinte erro: ${body ? body.message : null}`)
+                await FetchHandler.tratarBodyResponse(response, body);
+                return;
             }
         }
         catch (e) {

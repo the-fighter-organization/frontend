@@ -5,6 +5,10 @@ import { ALUNOS_HOME_ROUTE } from '../../route/alunos';
 import classNames from 'classnames'
 import { TURMAS_HOME_ROUTE } from '../../route/turma';
 import { AULAS_HOME_ROUTE } from '../../route/aula';
+import { Button } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
+import { CONFIGURACOES_HOME_ROUTE } from '../../route/configuracoes';
 
 interface ISidebarProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
     sidebarActive: boolean;
@@ -27,25 +31,18 @@ const Sidebar = (props: ISidebarProps) => {
             <a href="/" className="display-4 text-white d-flex justify-content-center" style={{ fontSize: 40 }}><strong>Warrior</strong></a>
         </div>
         <ul className="list-unstyled components">
-            {/* <p>{nomeEmpresa}</p> */}
             <SidebarItem pathname={pathname} to="/" exact={true}>Home</SidebarItem>
-            {/* <li className={classNames({ active: routeIsActive(pathname, "/", true) })}>
-                <a onClick={e => history.push('/')}>Home</a>
-            </li> */}
-
             <SidebarItem pathname={pathname} to={ALUNOS_HOME_ROUTE}>Alunos</SidebarItem>
-            {/* <li className={classNames({ active: routeIsActive(pathname, ALUNOS_HOME_ROUTE) })}>
-                <a onClick={e => history.push(ALUNOS_HOME_ROUTE)}>Alunos</a>
-            </li> */}
             <SidebarItem pathname={pathname} to={TURMAS_HOME_ROUTE}>Turmas</SidebarItem>
-            {/* <li className={classNames({ active: routeIsActive(pathname, TURMAS_HOME_ROUTE) })}>
-                <a onClick={e => history.push(TURMAS_HOME_ROUTE)}>Turmas</a>
-            </li> */}
             <SidebarItem pathname={pathname} to={AULAS_HOME_ROUTE}>Aulas</SidebarItem>
-            {/* <li className={classNames({ active: routeIsActive(pathname, AULAS_HOME_ROUTE) })}>
-                <a onClick={e => history.push(AULAS_HOME_ROUTE)}>Aulas</a>
-            </li> */}
         </ul>
+        <hr />
+        <div className="d-flex h-50 justify-content-center">
+            <Button tag={Link} color="dark" block to={CONFIGURACOES_HOME_ROUTE} className="align-self-end">
+                <FontAwesomeIcon icon="cog" size="2x" />
+            </Button>
+        </div>
+
     </nav>
 }
 

@@ -79,6 +79,12 @@ const AlunoFormTabDadosAluno = props => {
             </Row>
             <Row>
                 <Col xl="3" lg="3" md="6" sm="12">
+                    <Field component={renderInput} required label="Bolsista" name="bolsista" type="select" placeholder="Ex: Não">
+                        <option value="false">Não</option>
+                        <option value="true">Sim</option>
+                    </Field>
+                </Col>
+                <Col xl="3" lg="3" md="6" sm="12">
                     <Field component={renderInput} required label="Inativo" name="inativo" type="select" placeholder="Ex: Não">
                         <option value="false">Não</option>
                         <option value="true">Sim</option>

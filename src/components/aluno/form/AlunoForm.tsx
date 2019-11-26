@@ -22,7 +22,8 @@ interface Props extends AlunoState {
   handleSubmit?: any
   pristine?: boolean
   submitting?: boolean
-  initialValues?: IAlunoModel
+  initialValues?: IAlunoModel;
+  activeTab?: string;
 }
 
 interface State {
@@ -31,12 +32,19 @@ interface State {
 
 
 class AlunoForm extends React.Component<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
       activeTab: '1'
     }
+
+  }
+
+  async componentDidMount() {
+    const { activeTab } = this.props;
+
+    await this.setState({ activeTab })
   }
 
   setActiveTab(activeTab: string) {
@@ -147,4 +155,4 @@ export default reduxForm({
   form: 'aluno',
   validate: validate as any,
   onSubmitFail: reduxFormOnSubmitFail
-})(AlunoForm as any);
+})(AlunoForm as any) as any;

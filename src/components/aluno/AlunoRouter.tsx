@@ -11,9 +11,9 @@ const BASE_ROUTE = 'alunos';
 
 export default props => (
     <Switch>
-        <PrivateRoute component={AlunoInserir} path={ALUNOS_NOVO_ROUTE}/>
-        <PrivateRoute component={AlunoAlterar} path={`${ALUNOS_EDITAR_ROUTE}/:id`}/>
-        <PrivateRoute component={AlunoHome} path={ALUNOS_HOME_ROUTE}/>
-        <Redirect to={`/${BASE_ROUTE}`}/>
+        <PrivateRoute component={AlunoInserir} path={ALUNOS_NOVO_ROUTE} />
+        <PrivateRoute component={AlunoAlterar} path={`${ALUNOS_EDITAR_ROUTE}/:id/:activeTab`} />
+        <PrivateRoute component={AlunoHome} path={ALUNOS_HOME_ROUTE} />
+        <Redirect to={`/${BASE_ROUTE}`} />
     </Switch>
 )

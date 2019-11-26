@@ -24,7 +24,7 @@ const AlunoInserir = ({ dispatch }) => {
         <Container>
             <Row>
                 <Col>
-                    <AlunoForm onSubmit={handleSubmit} initialValues={initialValues} />
+                    <AlunoForm activeTab="1" onSubmit={handleSubmit} initialValues={initialValues} />
                 </Col>
             </Row>
         </Container>

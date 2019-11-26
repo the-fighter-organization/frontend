@@ -14,7 +14,8 @@ export function salvarAluno(payload: IAlunoModel) {
         const body = await response.json();
 
         if (!response.ok) {
-            throw new Error(`Ocorreu o seguinte erro: ${body ? body.toString() : null}`)
+            await FetchHandler.tratarBodyResponse(response, body);
+            return;
         }
 
         alert("Salvo com sucesso!")
@@ -40,7 +41,8 @@ export function buscarAlunos(busca: IBuscaParameters) {
             const body = await response.json();
 
             if (!response.ok) {
-                alert(`Ocorreu o seguinte erro: ${body ? body.toString() : null}`)
+                await FetchHandler.tratarBodyResponse(response, body);
+                return;
             }
 
             dispatch({
@@ -64,7 +66,8 @@ export function getAluno(id: string) {
             const body = await response.json();
 
             if (!response.ok) {
-                alert(`Ocorreu o seguinte erro: ${body ? body.toString() : null}`)
+                await FetchHandler.tratarBodyResponse(response, body);
+                return;
             }
 
             dispatch({
@@ -78,9 +81,28 @@ export function getAluno(id: string) {
     }
 }
 
+export function getAlunosComMensalidadesVencidas() {
+    return async dispatch => {
+        const http = new FetchHandler();
+        const response = await http.get("alunos/buscar-mensalidades-vencidas");
+
+        const body = await response.json();
+
+        if (!response.ok) {
+            await FetchHandler.tratarBodyResponse(response, body);
+            return;
+        }
+
+        dispatch({
+            type: "@alunos/fetch-mensalidades-vencidas" as AlunoReducerTypes,
+            payload: body
+        })
+    }
+}
+
+
 export function removerAluno(id: string) {
     return async dispatch => {
-
         try {
             const http = new FetchHandler();
             const response = await http.delete(`alunos/${id}`);
@@ -88,7 +110,8 @@ export function removerAluno(id: string) {
             const body = await response.json();
 
             if (!response.ok) {
-                alert(`Ocorreu o seguinte erro: ${body ? body.toString() : null}`)
+                await FetchHandler.tratarBodyResponse(response, body);
+                return;
             }
         }
         catch (e) {

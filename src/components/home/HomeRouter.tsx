@@ -17,6 +17,11 @@ import { WindowState } from '../../store/reducers/window';
 import TurmaRouter from '../turmas/TurmaRouter';
 import AulaRouter from '../aulas/AulaRouter';
 import classnames from 'classnames'
+import { CONFIGURACOES_HOME_ROUTE } from '../route/configuracoes';
+import { AULAS_HOME_ROUTE } from '../route/aula';
+import { TURMAS_HOME_ROUTE } from '../route/turma';
+import { ALUNOS_HOME_ROUTE } from '../route/alunos';
+import ConfiguracaoRouter from '../configuracoes/ConfiguracaoRouter';
 
 interface Props extends WindowState {
 
@@ -83,9 +88,10 @@ const HomeRouter: React.SFC<Props> = ({ navbarTitle }) => {
 						</div>
 					</Navbar>
 					<Switch>
-						<PrivateRoute component={AlunoRouter} path="/alunos" />
-						<PrivateRoute component={TurmaRouter} path="/turmas" />
-						<PrivateRoute component={AulaRouter} path="/aulas" />
+						<PrivateRoute component={AlunoRouter} path={ALUNOS_HOME_ROUTE} />
+						<PrivateRoute component={TurmaRouter} path={TURMAS_HOME_ROUTE} />
+						<PrivateRoute component={AulaRouter} path={AULAS_HOME_ROUTE} />
+						<PrivateRoute component={ConfiguracaoRouter} path={CONFIGURACOES_HOME_ROUTE} />
 						<PrivateRoute path="/conta" component={ContaRouter} />
 						<PrivateRoute component={HomeDashboard} path="/" />
 						<Redirect to={'/not-found'} />

@@ -14,17 +14,31 @@ interface Props extends AlunoState {
     dispatch: any
 }
 
-class AlunoAlterar extends React.Component<Props> {
+interface State {
+    activeTab: string;
+}
+
+class AlunoAlterar extends React.Component<Props, State> {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            activeTab: null
+        }
+    }
     async componentDidMount() {
         const { match, dispatch } = this.props;
 
-        if (!match || !match.params.id) {
+        if (!match || !match.params.id || !match.params.activeTab) {
             return <NotFoundPage />
         }
 
-        const { id } = match.params;
+        const { id, activeTab } = match.params;
+        console.log(activeTab)
+        await this.setState({ activeTab })
         await dispatch(getAluno(id))
         await dispatch(navbarTitleChange("Alterar aluno"))
+
     }
 
     async handleSubmit(e) {
@@ -38,16 +52,17 @@ class AlunoAlterar extends React.Component<Props> {
 
     render() {
         const { alunoEdit } = this.props;
+        const { activeTab } = this.state;
 
 
-        if (!alunoEdit) {
+        if (!alunoEdit || !activeTab) {
             return <LoadingPage />
         }
 
         return <Container>
             <Row>
                 <Col>
-                    <AlunoForm initialValues={alunoEdit} onSubmit={this.handleSubmit.bind(this)} />
+                    <AlunoForm activeTab={activeTab} initialValues={alunoEdit} onSubmit={this.handleSubmit.bind(this)} />
                 </Col>
             </Row>
         </Container>

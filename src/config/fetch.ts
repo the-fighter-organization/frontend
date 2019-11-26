@@ -1,5 +1,6 @@
 import CookieManager from "./cookie";
 import history from "./history";
+import { EOL } from 'os';
 
 export class FetchHandler {
 
@@ -75,5 +76,50 @@ export class FetchHandler {
         this.tratarResponse(response);
 
         return response;
+    }
+
+    public static async tratarBodyResponse(response: Response, body: any) {
+        debugger
+        let mensagemErro = null;
+
+        switch (response.status) {
+            case 400:
+                if (!body) {
+                    alert("Ocorreu um erro!")
+                    return;
+                }
+
+                const { errors, message } = body;
+
+                if (errors) {
+                    const keys = Object.keys(errors);
+
+                    mensagemErro = (keys || []).map(key => {
+                        const prop = body[key];
+
+                        if (!prop) return undefined
+
+                        return prop.message;
+                    }).join(EOL);
+                } else {
+                    if (message) {
+                        mensagemErro = message;
+                    }
+                }
+                break;
+            case 404:
+                mensagemErro = "Erro 404, recurso não encontrado!";
+                break;
+            case 500:
+                mensagemErro = "Ocorreu um erro interno no servidor!"
+            default:
+                if (body && body.message) {
+                    mensagemErro = body.message;
+                }
+        }
+
+        if (mensagemErro) {
+            alert(mensagemErro);
+        }
     }
 }

@@ -5,26 +5,24 @@ import CookieManager from '../../config/cookie';
 
 interface Props extends RouteProps {
   component: any;
-//   state?: ContaState;
-//   requiredPermissions?: ControleSilosPermissoes[];
   forbiddenMessage?: string;
   forbiddenTitle?: string;
 }
 
 export const PrivateRoute = ({
   component: Component,
-//   state,
+  //   state,
   forbiddenMessage,
   forbiddenTitle,
   ...rest
 }: Props) => (
-  <Route
-    {...rest}
-    render={props => {
-      let authorized = CookieManager.get();
-      return authorized ? <Component {...props} /> : <Redirect to="/login" />;
-    }}
-  />
-);
+    <Route
+      {...rest}
+      render={props => {
+        let authorized = CookieManager.get();
+        return authorized ? <Component {...props} /> : <Redirect to="/login" />;
+      }}
+    />
+  );
 
 export default PrivateRoute;
