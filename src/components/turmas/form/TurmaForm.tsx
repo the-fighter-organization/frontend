@@ -69,7 +69,7 @@ class TurmaForm extends React.Component<Props, State> {
             {initialValues && initialValues._id && <NavItem>
               <NavLink
                 className={classNames({ active: activeTab === '3', 'text-white': activeTab !== '3', 'bg-danger': activeTab !== '3' })}
-                onClick={() => { this.setActiveTab('4'); }}
+                onClick={() => { this.setActiveTab('3'); }}
               >
                 Administrativo
               </NavLink>
