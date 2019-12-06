@@ -5,22 +5,9 @@ import { EOL } from 'os';
 export class FetchHandler {
 
     public authorized: boolean = true;
-    public baseURL: string = '';
+    public baseURL: string = process.env.REACT_APP_API_URL;
     public headers: Headers = new Headers();
 
-    constructor() {
-        this.configBaseURL();
-    }
-
-    configBaseURL() {
-        if (process.env.NODE_ENV === 'development') {
-            this.baseURL = "http://localhost:3001";
-            // this.baseURL = "http://warrior-backend.appspot.com"
-        }
-        else {
-            this.baseURL = "http://warrior-backend.appspot.com"
-        }
-    }
     private getRequestAtual(url: string, method: string, body?: any): Request {
         if (this.authorized && !this.headers.get("Authorization")) {
             this.headers.append("Authorization", CookieManager.get("Authorization"));
