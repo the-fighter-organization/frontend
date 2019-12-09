@@ -7,7 +7,6 @@ import history from '../../../config/history';
 import { reduxFormOnSubmitFail } from '../../../config/reduxForm';
 import { IConfiguracao } from '../../../models/Configuracao';
 import { ConfiguracaoState } from '../../../store/reducers/configuracoes';
-import DateHandler from '../../../util/date';
 import { getFieldMask, renderInput } from '../../template/input/InputTemplate';
 import validate from './validate';
 

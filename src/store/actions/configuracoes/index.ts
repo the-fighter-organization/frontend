@@ -29,20 +29,19 @@ export function salvarConfiguracao(payload: IConfiguracao) {
 
 export function getConfiguracao() {
     return async dispatch => {
-
         try {
             debugger
             const http = new FetchHandler();
             const response = await http.get(`configuracoes`);
 
-            const body = await response.json();
+            const body = response.status !== 204 ? await response.json(): {};
 
             if (!response.ok) {
                 await FetchHandler.tratarBodyResponse(response, body);
                 return;
             }
 
-            dispatch({
+            return dispatch({
                 type: "@configuracoes/edit" as ConfiguracaoReducerTypes,
                 payload: body
             })
